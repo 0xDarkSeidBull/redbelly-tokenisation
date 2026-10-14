@@ -1,0 +1,101 @@
+{
+ "meta": {
+  "task": "TASK-26",
+  "title": "From fund to token",
+  "subtitle": "How a new Australian fund becomes a token on Redbelly Network, through Tokeniser",
+  "asset": "A new Australian fund",
+  "spelling": "Australian English",
+  "last_verified": "2026-10-14",
+  "version": "1 draft"
+ },
+ "voice": {"engine": "Kokoro-82M v1.0, ONNX build", "voice": "af_heart", "lang": "en-us", "speed": 1.0},
+ "timing": {"lead_in": 0.8, "gap_sentence": 0.25, "gap_scene": 0.6, "tail": 3.0, "target_seconds": [60, 90]},
+ "video": {"width": 1920, "height": 1080, "fps": 30},
+ "sources": {
+  "tk-home": {"title": "Tokeniser, home page and FAQ", "url": "https://tokeniser.com/", "evidence": "tokeniser-com"},
+  "tk-fund": {"title": "Tokeniser knowledge hub: How to tokenise a fund in Australia", "url": "https://tokeniser.com/resources/knowledge-hub/australia/how-to-tokenise-a-fund-in-australia", "evidence": "tokeniser-com-resources-knowledge-hub-australia-how-to-tokenise-a-fund-in-australia"},
+  "tk-works": {"title": "Tokeniser knowledge hub: How does Tokeniser work", "url": "https://tokeniser.com/resources/knowledge-hub/platform/how-does-tokeniser-work", "evidence": "tokeniser-com-resources-knowledge-hub-platform-how-does-tokeniser-work"},
+  "rb-tokenisation": {"title": "Redbelly Network: Asset tokenisation", "url": "https://redbelly.network/asset-tokenisation", "evidence": "redbelly-network-asset-tokenisation"}
+ },
+ "scenes": [
+  {"id": "s01", "name": "Intro",
+   "vo": ["Here is how a new Australian fund becomes a token on Redbelly Network, through Tokeniser, in 4 stages."],
+   "on_screen": ["From fund to token", "A new Australian fund, tokenised on Redbelly Network through Tokeniser"],
+   "visual": "Title on a soft blue band. A thin line fund icon turns into a round token. A 4 step stage tracker draws in at the top.",
+   "claims": [
+    {"covers": "on Redbelly Network, through Tokeniser", "source": "tk-home", "quote": "Tokeniser operates on Redbelly Network, Australia's public digital token infrastructure"},
+    {"covers": "a new Australian fund", "source": "tk-fund", "quote": "New funds can be established natively on tokenised infrastructure; existing funds can be migrated."},
+    {"covers": "in 4 stages", "source": "tk-fund", "quote": "The process has four stages: legal preparation, platform onboarding, compliance configuration, and investor register establishment."}
+   ]},
+  {"id": "s02", "name": "What tokenisation means",
+   "vo": ["Tokenisation records ownership as digital tokens, and lets you program the rules of the asset."],
+   "on_screen": ["Ownership, recorded as digital tokens", "Rules, programmed into the asset"],
+   "visual": "A register of owners turns into a row of tokens. A small rules card clicks into each token.",
+   "claims": [
+    {"covers": "records ownership as digital tokens, and lets you program the rules of the asset", "source": "tk-home", "quote": "Tokenisation records ownership of financial products and services as digital tokens, and lets you program the rules of the asset."}
+   ]},
+  {"id": "s03", "name": "Stage 1, legal preparation",
+   "vo": ["Stage 1, legal preparation.", "The fund's documents must allow ownership to be recorded on a blockchain.", "No separate tokenisation licence is needed in Australia."],
+   "on_screen": ["Stage 1", "Legal preparation", "Fund documents allow ownership records on a blockchain", "No separate tokenisation licence in Australia"],
+   "visual": "Stage tracker lights step 1. A trust deed page gets a tick next to the ownership clause. A licence card shows the existing licence, with no second card added.",
+   "claims": [
+    {"covers": "Stage 1, legal preparation", "source": "tk-fund", "quote": "Legal review of constitutional documents is a required first step."},
+    {"covers": "documents must allow ownership to be recorded on a blockchain", "source": "tk-fund", "quote": "Some documents need amendment to permit on-chain ownership records and electronic transfer."},
+    {"covers": "No separate tokenisation licence is needed in Australia", "source": "tk-fund", "quote": "There is no separate tokenisation licence required in Australia."}
+   ]},
+  {"id": "s04", "name": "Stage 2, platform onboarding",
+   "vo": ["Stage 2, platform onboarding.", "The manager and the fund are verified on Tokeniser, and the token is designed."],
+   "on_screen": ["Stage 2", "Platform onboarding", "Manager and fund verified", "Token designed: asset class and rules"],
+   "visual": "Stage tracker lights step 2. 2 cards, Manager and Fund, each get a verified tick. A token outline is drawn with labels for asset class and rules.",
+   "claims": [
+    {"covers": "platform onboarding on Tokeniser", "source": "tk-fund", "quote": "Once the legal framework is in place, the fund manager completes Tokeniser's platform onboarding process."},
+    {"covers": "The manager and the fund are verified", "source": "tk-fund", "quote": "Complete entity verification for the fund manager and the fund."},
+    {"covers": "the token is designed: asset class and rules", "source": "tk-fund", "quote": "For new funds, design the token parameters: asset class, compliance rules, and corporate action schedule."}
+   ]},
+  {"id": "s05", "name": "Stage 3, compliance configuration",
+   "vo": ["Stage 3, compliance configuration.", "Identity checks, who may invest, and transfer limits are encoded into the token and enforced automatically."],
+   "on_screen": ["Stage 3", "Compliance configuration", "Identity checks (KYC/AML)", "Who may invest", "Transfer limits", "Enforced automatically"],
+   "visual": "Stage tracker lights step 3. 3 rule cards slide into the token. A small pill reads Enforced automatically.",
+   "claims": [
+    {"covers": "Identity checks (KYC/AML)", "source": "tk-fund", "quote": "Configure KYC/AML verification requirements for investors."},
+    {"covers": "who may invest", "source": "tk-fund", "quote": "Set investor eligibility criteria, wholesale status, accredited investor status, and foreign investor limits."},
+    {"covers": "transfer limits", "source": "tk-fund", "quote": "Set transfer restrictions, lock-up periods, permitted transferee classes, and any fund-specific restrictions."},
+    {"covers": "encoded into the token and enforced automatically", "source": "tk-works", "quote": "Compliance rules are encoded into the token at issuance and enforced automatically at every transfer."}
+   ]},
+  {"id": "s06", "name": "Stage 4, investor register",
+   "vo": ["Stage 4, the investor register.", "Each investor verifies their identity and gets a digital wallet.", "No tokens are issued until then."],
+   "on_screen": ["Stage 4", "Investor register", "Identity verified", "Digital wallet set up", "No tokens before verification"],
+   "visual": "Stage tracker lights step 4. Investor cards get an identity tick, then a wallet icon. A token waits beside each card until both ticks show.",
+   "claims": [
+    {"covers": "Each investor verifies their identity and gets a digital wallet", "source": "tk-fund", "quote": "Investors complete digital onboarding, identity verification, investor classification, and wallet setup, before their tokens are issued."},
+    {"covers": "No tokens are issued until then", "source": "tk-works", "quote": "Until onboarding is complete and the wallet is verified, tokens cannot be issued to or transferred to that investor."}
+   ]},
+  {"id": "s07", "name": "Token issuance",
+   "vo": ["Tokens are then issued on Redbelly Network, into verified wallets.", "From the first token, this register is the official record of ownership."],
+   "on_screen": ["Tokens issued on Redbelly Network", "Into verified wallets", "Official ownership record from the first token"],
+   "visual": "Tokens move along a Redbelly Network line into the verified wallets. The register fills in row by row.",
+   "claims": [
+    {"covers": "issued on Redbelly Network, into verified wallets", "source": "tk-works", "quote": "Tokens are minted on Redbelly Network and transferred to the verified investor wallets."},
+    {"covers": "this register is the official record of ownership", "source": "tk-fund", "quote": "The on-chain register is the register of record from day one."},
+    {"covers": "From the first token", "source": "tk-fund", "quote": "For a new fund, the investor register is established on-chain at the point of the first token issuance."}
+   ]},
+  {"id": "s08", "name": "Transfers",
+   "vo": ["Every transfer is checked against the rules first, and breaches are rejected.", "When investors hold their own wallet, transfer and payment complete together, in seconds."],
+   "on_screen": ["Every transfer checked first", "Breaches rejected", "Own wallet: transfer and payment together, in seconds"],
+   "visual": "A transfer arrow reaches a checkpoint. A transfer that breaks a rule stops with a cross. A valid transfer passes, and token and payment swap at the same moment.",
+   "claims": [
+    {"covers": "Every transfer is checked against the rules first", "source": "tk-works", "quote": "Every transfer is checked against configured compliance parameters before submission."},
+    {"covers": "breaches are rejected", "source": "tk-works", "quote": "Transfers to unverified wallets, ineligible investors, or in breach of restrictions are rejected."},
+    {"covers": "When investors hold their own wallet", "source": "tk-works", "quote": "the investor either holds their own private key (non-custodial wallet)"},
+    {"covers": "transfer and payment complete together, in seconds", "source": "tk-works", "quote": "For non-custodial wallets, atomic settlements, transfer and payment complete simultaneously in seconds."}
+   ]},
+  {"id": "s09", "name": "Close",
+   "vo": ["Tokeniser operates on Redbelly Network, Australia's public digital token infrastructure, where transactions are confirmed once and cannot be reversed."],
+   "on_screen": ["Tokeniser operates on Redbelly Network", "Australia's public digital token infrastructure", "Transactions confirmed once, cannot be reversed", "tokeniser.com"],
+   "visual": "Tokeniser and Redbelly logos side by side on white, the line text below, tokeniser.com last.",
+   "claims": [
+    {"covers": "Tokeniser operates on Redbelly Network, Australia's public digital token infrastructure", "source": "tk-home", "quote": "Tokeniser operates on Redbelly Network, Australia's public digital token infrastructure"},
+    {"covers": "transactions are confirmed once and cannot be reversed", "source": "rb-tokenisation", "quote": "Deterministic finality ensures transactions are confirmed once and cannot be reversed"}
+   ]}
+ ]
+}
