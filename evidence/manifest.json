@@ -1,0 +1,381 @@
+{
+ "captured_with": "Playwright Chromium, visible page text (document.body.innerText)",
+ "pages": {
+  "tokeniser-com": {
+   "url": "https://tokeniser.com/",
+   "final_url": "https://tokeniser.com/",
+   "captured_utc": "2026-10-14T08:57:40Z",
+   "file": "evidence/tokeniser-com.txt",
+   "sha256": "d1fbfa3569b9d500b0ba9362beb0499d8c42bbcec1e25f96fd3cdc84faee778e",
+   "chars": 4533
+  },
+  "tokeniser-com-product": {
+   "url": "https://tokeniser.com/product",
+   "final_url": "https://tokeniser.com/product",
+   "captured_utc": "2026-10-14T08:57:45Z",
+   "file": "evidence/tokeniser-com-product.txt",
+   "sha256": "2b07cc5f80531c1b2389ceb3ccda5799444c28bda92d41456ddd2b969b263732",
+   "chars": 2350
+  },
+  "tokeniser-com-product-getting-started": {
+   "url": "https://tokeniser.com/product/getting-started",
+   "final_url": "https://tokeniser.com/product/getting-started",
+   "captured_utc": "2026-10-14T08:57:51Z",
+   "file": "evidence/tokeniser-com-product-getting-started.txt",
+   "sha256": "b900aa8007976b2aa60216a71d141abca3e7c46a512a7bd457a839f7df70b37a",
+   "chars": 4696
+  },
+  "tokeniser-com-product-liquidity": {
+   "url": "https://tokeniser.com/product/liquidity",
+   "final_url": "https://tokeniser.com/product/liquidity",
+   "captured_utc": "2026-10-14T08:57:56Z",
+   "file": "evidence/tokeniser-com-product-liquidity.txt",
+   "sha256": "54da0fa1859474d24d30ff9cddd63b20fc5aa6c67bf18b770971e5e22864e72d",
+   "chars": 3009
+  },
+  "tokeniser-com-product-distribution": {
+   "url": "https://tokeniser.com/product/distribution",
+   "final_url": "https://tokeniser.com/product/distribution",
+   "captured_utc": "2026-10-14T08:58:02Z",
+   "file": "evidence/tokeniser-com-product-distribution.txt",
+   "sha256": "5d44e68ab6806760c3729fde98c2a26432e16c35172e975a71438e4cb58f49d6",
+   "chars": 3610
+  },
+  "tokeniser-com-product-efficiency": {
+   "url": "https://tokeniser.com/product/efficiency",
+   "final_url": "https://tokeniser.com/product/efficiency",
+   "captured_utc": "2026-10-14T08:58:07Z",
+   "file": "evidence/tokeniser-com-product-efficiency.txt",
+   "sha256": "4ba2865ea2651b14d9f40eb8dccabfd44b92f0d544ec7e164fb594fb02c9c827",
+   "chars": 2635
+  },
+  "tokeniser-com-product-superpowers-always-on": {
+   "url": "https://tokeniser.com/product/superpowers/always-on",
+   "final_url": "https://tokeniser.com/product/superpowers/always-on",
+   "captured_utc": "2026-10-14T08:58:13Z",
+   "file": "evidence/tokeniser-com-product-superpowers-always-on.txt",
+   "sha256": "ef3b6a0adff45b2ff08da09e5949b388450dc3790862df963c3c82e87c0b4a64",
+   "chars": 2421
+  },
+  "tokeniser-com-product-superpowers-automated-compliance": {
+   "url": "https://tokeniser.com/product/superpowers/automated-compliance",
+   "final_url": "https://tokeniser.com/product/superpowers/automated-compliance",
+   "captured_utc": "2026-10-14T08:58:18Z",
+   "file": "evidence/tokeniser-com-product-superpowers-automated-compliance.txt",
+   "sha256": "7625247b50780fa77300eb0f68fbe613ba267985df92f662e95e60e0f95b9cbd",
+   "chars": 2369
+  },
+  "tokeniser-com-product-superpowers-collateral-mobility": {
+   "url": "https://tokeniser.com/product/superpowers/collateral-mobility",
+   "final_url": "https://tokeniser.com/product/superpowers/collateral-mobility",
+   "captured_utc": "2026-10-14T08:58:23Z",
+   "file": "evidence/tokeniser-com-product-superpowers-collateral-mobility.txt",
+   "sha256": "328dd8008a424b1059cfb307d878704c6cd020e46eae5b2d1f12c49c553946ae",
+   "chars": 2265
+  },
+  "tokeniser-com-product-superpowers-instant-settlement": {
+   "url": "https://tokeniser.com/product/superpowers/instant-settlement",
+   "final_url": "https://tokeniser.com/product/superpowers/instant-settlement",
+   "captured_utc": "2026-10-14T08:58:28Z",
+   "file": "evidence/tokeniser-com-product-superpowers-instant-settlement.txt",
+   "sha256": "279b0d135b2a9b7995727a185895b9b7ffb7dc9664924d17c2ea2137f3c5022b",
+   "chars": 2337
+  },
+  "tokeniser-com-product-superpowers-real-time-transparency": {
+   "url": "https://tokeniser.com/product/superpowers/real-time-transparency",
+   "final_url": "https://tokeniser.com/product/superpowers/real-time-transparency",
+   "captured_utc": "2026-10-14T08:58:33Z",
+   "file": "evidence/tokeniser-com-product-superpowers-real-time-transparency.txt",
+   "sha256": "010389d6d2e4791a2cb0114a28a90482b416eae48cc5defd171abd39571feeb9",
+   "chars": 2487
+  },
+  "tokeniser-com-product-superpowers-secondary-transfer": {
+   "url": "https://tokeniser.com/product/superpowers/secondary-transfer",
+   "final_url": "https://tokeniser.com/product/superpowers/secondary-transfer",
+   "captured_utc": "2026-10-14T08:58:38Z",
+   "file": "evidence/tokeniser-com-product-superpowers-secondary-transfer.txt",
+   "sha256": "adcf97569cc49a5a818a7f8bd63e26813f5613a48cdb791cd78fb3b379b2dd00",
+   "chars": 2459
+  },
+  "tokeniser-com-technology": {
+   "url": "https://tokeniser.com/technology",
+   "final_url": "https://tokeniser.com/technology",
+   "captured_utc": "2026-10-14T08:58:44Z",
+   "file": "evidence/tokeniser-com-technology.txt",
+   "sha256": "c69648fe52ce28c2dc54aede199ae51dae08c360c7dbac979a4f98e6afd60f5d",
+   "chars": 7103
+  },
+  "tokeniser-com-why-tokenise": {
+   "url": "https://tokeniser.com/why-tokenise",
+   "final_url": "https://tokeniser.com/why-tokenise",
+   "captured_utc": "2026-10-14T08:58:51Z",
+   "file": "evidence/tokeniser-com-why-tokenise.txt",
+   "sha256": "ca5b58bca9e5fa597658b8a0b89f62572e9e1eab3d38d494539627c93d0d8cfd",
+   "chars": 8312
+  },
+  "tokeniser-com-protocol-finance": {
+   "url": "https://tokeniser.com/protocol-finance",
+   "final_url": "https://tokeniser.com/protocol-finance",
+   "captured_utc": "2026-10-14T08:58:57Z",
+   "file": "evidence/tokeniser-com-protocol-finance.txt",
+   "sha256": "ca39d4a2b6b42365edd2b2826f1ce46fe12370abb7dd155a237af8fb4609d753",
+   "chars": 9727
+  },
+  "tokeniser-com-solutions-funds": {
+   "url": "https://tokeniser.com/solutions/funds",
+   "final_url": "https://tokeniser.com/solutions/funds",
+   "captured_utc": "2026-10-14T08:59:03Z",
+   "file": "evidence/tokeniser-com-solutions-funds.txt",
+   "sha256": "c82fc3a7fccd027dc11de205bc433b886cc33468e17325e63e5c303a2a6e1f31",
+   "chars": 6937
+  },
+  "tokeniser-com-solutions-companies": {
+   "url": "https://tokeniser.com/solutions/companies",
+   "final_url": "https://tokeniser.com/solutions/companies",
+   "captured_utc": "2026-10-14T08:59:10Z",
+   "file": "evidence/tokeniser-com-solutions-companies.txt",
+   "sha256": "08b7efb85ca2e9a7d654175fb596801c95be6094ebe04052c60a57b715e29bb9",
+   "chars": 6233
+  },
+  "tokeniser-com-solutions-asset-administrators": {
+   "url": "https://tokeniser.com/solutions/asset-administrators",
+   "final_url": "https://tokeniser.com/solutions/asset-administrators",
+   "captured_utc": "2026-10-14T08:59:16Z",
+   "file": "evidence/tokeniser-com-solutions-asset-administrators.txt",
+   "sha256": "ef2ebf06d788157f149bd654ef5c9b19b8c3b56452ab31e09fb8559d5e62c6ed",
+   "chars": 8580
+  },
+  "tokeniser-com-resources-knowledge-hub": {
+   "url": "https://tokeniser.com/resources/knowledge-hub",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub",
+   "captured_utc": "2026-10-14T08:59:21Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub.txt",
+   "sha256": "b93becd19d046bda5d1b033d8e94a487e44b4ca2d8082b8c06fa4effc6c9431c",
+   "chars": 2988
+  },
+  "tokeniser-com-about": {
+   "url": "https://tokeniser.com/about",
+   "final_url": "https://tokeniser.com/about",
+   "captured_utc": "2026-10-14T08:59:27Z",
+   "file": "evidence/tokeniser-com-about.txt",
+   "sha256": "8e83f922ffabc43782b972472b1369c9feaed72092d7f6e0d1601d6a93fb04c1",
+   "chars": 3435
+  },
+  "redbelly-network-asset-tokenisation": {
+   "url": "https://redbelly.network/asset-tokenisation",
+   "final_url": "https://redbelly.network/asset-tokenisation",
+   "captured_utc": "2026-10-14T08:59:35Z",
+   "file": "evidence/redbelly-network-asset-tokenisation.txt",
+   "sha256": "197aa2b0244a5b80a51e6658e65ef81131c504ad49b3f671a2cfb5b4dce79cec",
+   "chars": 5306
+  },
+  "redbelly-network": {
+   "url": "https://redbelly.network/",
+   "final_url": "https://redbelly.network/",
+   "captured_utc": "2026-10-14T08:59:43Z",
+   "file": "evidence/redbelly-network.txt",
+   "sha256": "586eeb4f0ee861ff2c3c5b2a7db788d50af6053f6d5fb8ed9291797f1706cbbb",
+   "chars": 4755
+  },
+  "redbelly-network-brand": {
+   "url": "https://redbelly.network/brand",
+   "final_url": "https://redbelly.network/brand",
+   "captured_utc": "2026-10-14T08:59:50Z",
+   "file": "evidence/redbelly-network-brand.txt",
+   "sha256": "1978f7a9b3bdc108235b3f9cc6b6096ca6ab6c77ddf287c66b7c1a058bd1e0b7",
+   "chars": 2260
+  },
+  "taskboard-redbellydao-network-brand": {
+   "url": "https://taskboard.redbellydao.network/brand",
+   "final_url": "https://taskboard.redbellydao.network/brand",
+   "captured_utc": "2026-10-14T08:59:56Z",
+   "file": "evidence/taskboard-redbellydao-network-brand.txt",
+   "sha256": "127382728d7343714942bf3e72f2cd2d986a1e144c81d0dd9d5444e166111d43",
+   "chars": 11124
+  },
+  "taskboard-redbellydao-network-tasks-task-26": {
+   "url": "https://taskboard.redbellydao.network/tasks/TASK-26",
+   "final_url": "https://taskboard.redbellydao.network/tasks/TASK-26",
+   "captured_utc": "2026-10-14T09:00:02Z",
+   "file": "evidence/taskboard-redbellydao-network-tasks-task-26.txt",
+   "sha256": "23541a35829921c52c3a3ada8f324205ba5a36667611906c54d3f0902626547e",
+   "chars": 4488
+  },
+  "tokeniser-com-resources-knowledge-hub-business-case-why-tokenise-your-assets": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/business-case/why-tokenise-your-assets",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/business-case/why-tokenise-your-assets",
+   "captured_utc": "2026-10-14T09:00:21Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-business-case-why-tokenise-your-assets.txt",
+   "sha256": "eba31191c60efd80ad94cf1d9071aeb6c7f253a9966e63322f8ad961a89cdb88",
+   "chars": 8097
+  },
+  "tokeniser-com-resources-knowledge-hub-business-case-what-does-tokenising-your-assets-enable": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/business-case/what-does-tokenising-your-assets-enable",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/business-case/what-does-tokenising-your-assets-enable",
+   "captured_utc": "2026-10-14T09:00:27Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-business-case-what-does-tokenising-your-assets-enable.txt",
+   "sha256": "b137291aba9e4f27e6bbae9c5f081f1d9fb90c2d254d886db112ef28c9c17bc6",
+   "chars": 8068
+  },
+  "tokeniser-com-resources-knowledge-hub-business-case-business-advantages-of-asset-tokenisation": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/business-case/business-advantages-of-asset-tokenisation",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/business-case/business-advantages-of-asset-tokenisation",
+   "captured_utc": "2026-10-14T09:00:33Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-business-case-business-advantages-of-asset-tokenisation.txt",
+   "sha256": "1ff91739d4d8edcdb0d54e9d024f87fd8c91d3aec4920afd7ab9dfd06dd8c6db",
+   "chars": 8742
+  },
+  "tokeniser-com-resources-knowledge-hub-business-case-cost-advantages-tokenisation-vs-traditional": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/business-case/cost-advantages-tokenisation-vs-traditional",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/business-case/cost-advantages-tokenisation-vs-traditional",
+   "captured_utc": "2026-10-14T09:00:39Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-business-case-cost-advantages-tokenisation-vs-traditional.txt",
+   "sha256": "0467025969fdc70c4dc5e8939dd35051a4ca53d54ff03d582aed5eb18958c774",
+   "chars": 8317
+  },
+  "tokeniser-com-resources-knowledge-hub-business-case-risks-of-asset-tokenisation": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/business-case/risks-of-asset-tokenisation",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/business-case/risks-of-asset-tokenisation",
+   "captured_utc": "2026-10-14T09:00:44Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-business-case-risks-of-asset-tokenisation.txt",
+   "sha256": "c4415aaf8ca251cf48c47c32060fa059418cc8d9927815d450a16e2a309ab2f4",
+   "chars": 8487
+  },
+  "tokeniser-com-resources-knowledge-hub-business-case-is-asset-tokenisation-right-for-my-fund": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/business-case/is-asset-tokenisation-right-for-my-fund",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/business-case/is-asset-tokenisation-right-for-my-fund",
+   "captured_utc": "2026-10-14T09:00:50Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-business-case-is-asset-tokenisation-right-for-my-fund.txt",
+   "sha256": "d04a3effb9007cbc0794c94b867766347126051013b2712bc8708716132c3cd7",
+   "chars": 8136
+  },
+  "tokeniser-com-resources-knowledge-hub-comparison-tokenised-assets-vs-traditional-securities": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/comparison/tokenised-assets-vs-traditional-securities",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/comparison/tokenised-assets-vs-traditional-securities",
+   "captured_utc": "2026-10-14T09:00:56Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-comparison-tokenised-assets-vs-traditional-securities.txt",
+   "sha256": "60456d188f45a6e01f9b2e6601d0941a178d28e40a307265762b3249b3b7303e",
+   "chars": 10136
+  },
+  "tokeniser-com-resources-knowledge-hub-comparison-tokeniser-vs-traditional-share-registry": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/comparison/tokeniser-vs-traditional-share-registry",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/comparison/tokeniser-vs-traditional-share-registry",
+   "captured_utc": "2026-10-14T09:01:02Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-comparison-tokeniser-vs-traditional-share-registry.txt",
+   "sha256": "4ea2cbb17fa1478222e8b901ad2c4338042f308afed05bf2f0be203df4ff3cbf",
+   "chars": 10578
+  },
+  "tokeniser-com-resources-knowledge-hub-comparison-asset-tokenisation-cost-fund-managers": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/comparison/asset-tokenisation-cost-fund-managers",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/comparison/asset-tokenisation-cost-fund-managers",
+   "captured_utc": "2026-10-14T09:01:08Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-comparison-asset-tokenisation-cost-fund-managers.txt",
+   "sha256": "0311e6f6a279a2c648c968bd4bccc2a4262925b248d77e12f720f249e2bb0f71",
+   "chars": 7321
+  },
+  "tokeniser-com-resources-knowledge-hub-australia-how-to-tokenise-a-fund-in-australia": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/australia/how-to-tokenise-a-fund-in-australia",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/australia/how-to-tokenise-a-fund-in-australia",
+   "captured_utc": "2026-10-14T09:01:14Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-australia-how-to-tokenise-a-fund-in-australia.txt",
+   "sha256": "4c6e5b345e2d5b1b006c795c3b43fc1dde898d0ad1622c1d69521576af0a6058",
+   "chars": 10270
+  },
+  "tokeniser-com-resources-knowledge-hub-australia-where-to-tokenise-assets-in-australia": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/australia/where-to-tokenise-assets-in-australia",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/australia/where-to-tokenise-assets-in-australia",
+   "captured_utc": "2026-10-14T09:01:20Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-australia-where-to-tokenise-assets-in-australia.txt",
+   "sha256": "d37451edf691ac214ecae013606f0c04b47b87902d9311497d8def769f7a29d6",
+   "chars": 8585
+  },
+  "tokeniser-com-resources-knowledge-hub-australia-how-tokeniser-handles-investor-compliance": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/australia/how-tokeniser-handles-investor-compliance",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/australia/how-tokeniser-handles-investor-compliance",
+   "captured_utc": "2026-10-14T09:01:26Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-australia-how-tokeniser-handles-investor-compliance.txt",
+   "sha256": "6f12d9204f64ba0bd47c08eb6d8c054a6b69b3a191786e7200e20ff0b262e491",
+   "chars": 8279
+  },
+  "tokeniser-com-resources-knowledge-hub-platform-what-is-a-digital-asset-administration-platform": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/platform/what-is-a-digital-asset-administration-platform",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/platform/what-is-a-digital-asset-administration-platform",
+   "captured_utc": "2026-10-14T09:01:31Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-platform-what-is-a-digital-asset-administration-platform.txt",
+   "sha256": "c55900a458cc72155ed5bfb8c87c8049dbe7779f44b35c285ff857039c5f08ef",
+   "chars": 7666
+  },
+  "tokeniser-com-resources-knowledge-hub-platform-what-is-protocol-finance": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/platform/what-is-protocol-finance",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/platform/what-is-protocol-finance",
+   "captured_utc": "2026-10-14T09:01:37Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-platform-what-is-protocol-finance.txt",
+   "sha256": "da7bb60596772aaa3db6d7a54032a68e586394a8a3622a425f655c1db085f6f8",
+   "chars": 8944
+  },
+  "tokeniser-com-resources-knowledge-hub-platform-what-is-tokeniser": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/platform/what-is-tokeniser",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/platform/what-is-tokeniser",
+   "captured_utc": "2026-10-14T09:01:43Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-platform-what-is-tokeniser.txt",
+   "sha256": "560871be1066afb227016b383b4fa1f5942be720b0f8a877ecd7b77a7ee40ec4",
+   "chars": 8981
+  },
+  "tokeniser-com-resources-knowledge-hub-platform-how-does-tokeniser-work": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/platform/how-does-tokeniser-work",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/platform/how-does-tokeniser-work",
+   "captured_utc": "2026-10-14T09:01:49Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-platform-how-does-tokeniser-work.txt",
+   "sha256": "43e23323de308a2d834ec2e653ae461358f6ca39b7d9426eb44d985b38106d5a",
+   "chars": 10169
+  },
+  "tokeniser-com-resources-knowledge-hub-platform-what-is-a-tokenised-cap-table": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/platform/what-is-a-tokenised-cap-table",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/platform/what-is-a-tokenised-cap-table",
+   "captured_utc": "2026-10-14T09:01:55Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-platform-what-is-a-tokenised-cap-table.txt",
+   "sha256": "90401842684b1817373de4ba2ac03048003e1eec666ccb76b3f98667cc513480",
+   "chars": 7633
+  },
+  "tokeniser-com-resources-knowledge-hub-platform-secondary-market-trading-tokenised-assets": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/platform/secondary-market-trading-tokenised-assets",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/platform/secondary-market-trading-tokenised-assets",
+   "captured_utc": "2026-10-14T09:02:01Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-platform-secondary-market-trading-tokenised-assets.txt",
+   "sha256": "52d63367a7c3933c81ce44e6d7d3745da8ad16cd6dfbaeee95a90695a11a90b4",
+   "chars": 8909
+  },
+  "tokeniser-com-resources-knowledge-hub-platform-collateralised-lending-digital-assets": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/platform/collateralised-lending-digital-assets",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/platform/collateralised-lending-digital-assets",
+   "captured_utc": "2026-10-14T09:02:07Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-platform-collateralised-lending-digital-assets.txt",
+   "sha256": "5691305ec1ac7f1a7866d33580fe04b88a84bcded562e950ff2b3de0a5f28d28",
+   "chars": 7880
+  },
+  "tokeniser-com-resources-knowledge-hub-platform-what-is-self-custodial-asset-administration": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/platform/what-is-self-custodial-asset-administration",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/platform/what-is-self-custodial-asset-administration",
+   "captured_utc": "2026-10-14T09:02:12Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-platform-what-is-self-custodial-asset-administration.txt",
+   "sha256": "d87b52d0640050a2b4460774d72b74e730776624a33bc04d334fe349c48a89c7",
+   "chars": 7729
+  },
+  "tokeniser-com-resources-knowledge-hub-getting-started-asset-tokenisation-checklist-fund-managers": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/getting-started/asset-tokenisation-checklist-fund-managers",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/getting-started/asset-tokenisation-checklist-fund-managers",
+   "captured_utc": "2026-10-14T09:02:18Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-getting-started-asset-tokenisation-checklist-fund-managers.txt",
+   "sha256": "ff511e0bb34fbe68d3f545720526d1c7a2fc5a1d27d4ab1140a4e21b8df9cf04",
+   "chars": 9129
+  },
+  "tokeniser-com-resources-knowledge-hub-getting-started-how-long-to-tokenise-a-fund": {
+   "url": "https://tokeniser.com/resources/knowledge-hub/getting-started/how-long-to-tokenise-a-fund",
+   "final_url": "https://tokeniser.com/resources/knowledge-hub/getting-started/how-long-to-tokenise-a-fund",
+   "captured_utc": "2026-10-14T09:02:24Z",
+   "file": "evidence/tokeniser-com-resources-knowledge-hub-getting-started-how-long-to-tokenise-a-fund.txt",
+   "sha256": "a2aba6064a16a22241808833d6b9c5ecae3581ff0f318eae4f7581635a5bfa4e",
+   "chars": 9342
+  }
+ }
+}

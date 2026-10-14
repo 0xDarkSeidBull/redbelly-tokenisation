@@ -1,0 +1,106 @@
+Skip to content
+Task Board
+Tasks
+Ledger
+Rules
+Sign in
+All tasks
+TASK-26
+Content
+Cycle 3
+Open
+Tokenisation Explainer Animation
+
+Make a 60 to 90 second animated explainer showing how a regulated real world asset is tokenised on Redbelly through Tokeniser.
+
+Brief
+
+Tokenisation is Redbelly's core story, and most people outside the industry still cannot picture what it means in practice. There is no short video that walks through it from start to finish. This explainer takes one regulated asset and shows, step by step and in plain language, how it becomes a compliant token on Redbelly through Tokeniser. It will be used in Tokeniser marketing, on the DAO website and in the Start Here hub.
+
+How it is checked: reviewers assess every submission first. The scripts of shortlisted entries are then sent to the Redbelly team for a factual check, and anything they flag comes back to you as a revision.
+
+Scope of work
+Pick one realistic regulated asset as the example, such as a property, a fund or a bond.
+Write a short script that follows it from the real world asset to the token on Redbelly, using only facts from the supplied resources.
+Animate the script in a clean, corporate style that looks at home next to Tokeniser's own website.
+Tell the story with a voiceover, on screen text, or both, whichever suits your workflow.
+Submit the script as a shared document (Google Doc, Word file or PDF) alongside the video, so it can be fact checked if your entry is shortlisted.
+Deliverables
+All are required
+1.
+The script, as a shared document (Google Doc, Word file or PDF).
+2.
+The final video, 60 to 90 seconds, with subtitles burned in or as a separate file. Video specs: 16:9, 1080p or higher, 24 fps or higher, MP4 or MOV.
+3.
+Project files from whatever tools you used.
+4.
+Licence proof for any music, voice, stock footage or fonts you did not make yourself.
+Quality benchmarks
+Someone with no crypto background understands how the asset becomes a token after one watch.
+Every claim about Redbelly and Tokeniser matches the script and the supplied resources.
+Looks and feels Tokeniser themed, with a corporate tone that would fit Tokeniser's own marketing.
+Clean render and smooth motion, audio clear and balanced.
+Failure criteria
+Any one fails the submission
+No script submitted, or a video that differs from its script.
+Any factual claim about Redbelly or Tokeniser that is wrong or not in the supplied resources.
+Price talk, investment advice or promises of returns.
+Cartoon, meme or hype styling.
+Any music, voice, stock asset or font without a licence that allows commercial use.
+Personal credit inside the deliverable (names, handles, signatures, watermarks or "made by" lines). Contributors are credited by the DAO once the work is accepted, not inside the work itself.
+Resources
+Tokeniser website (product, technology, why tokenise, knowledge hub): https://tokeniser.com
+Redbelly asset tokenisation: https://redbelly.network/asset-tokenisation
+Redbelly Network website: https://redbelly.network
+Redbelly brand kit (logos, Readex Pro, colours): https://redbelly.network/brand
+Task Board brand kit (colours, type, logo rules and voice): https://taskboard.redbellydao.network/brand
+Any tools are accepted, free ones included (DaVinci Resolve, Blender, Canva).
+How submissions are scored
+7 criteria, 1 to 5 each, 35 in total
+1.
+Deliverable completeness
+Does the submission include everything listed in Required Deliverables?
+2.
+Quality Benchmarks met
+Does the submission satisfy each benchmark defined in the task spec?
+3.
+Technical accuracy
+Is the code, analysis, or content factually correct and free of critical errors?
+4.
+Documentation quality
+Is the companion documentation clear, complete, and deployment-ready?
+5.
+Test coverage / verification
+Are all claims, functions, or outputs verifiable and tested?
+6.
+Failure Criteria
+Does the submission avoid every defined failure condition?
+7.
+Overall standard
+Does the submission meet the bar expected for a paid, published deliverable?
+
+The highest scoring shortlisted submission is selected when the task completes. Only the selected submission is paid.
+
+Reward
+
+56,711 RBNT
+about $113 today
+
+100% RBNT
+
+Slots
+0 of 5 open
+Submissions close
+2 Nov 2026, 20 days left
+Paid
+The selected submission only
+Sign in to take partCreate an account
+
+Paid community work for Redbelly, reviewed against a published rubric and recorded on a public ledger.
+
+Rulebook
+Terms and Conditions
+Public ledger
+Brand kit
+
+Redbelly DAO Community Task Board
