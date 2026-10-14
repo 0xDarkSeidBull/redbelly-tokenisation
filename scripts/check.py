@@ -9,6 +9,7 @@
    and no commit message has an en or em dash or emoji
 5. no personal credit in tracked files (names are read from the gitignored .credit-names)
 6. voiceover timeline sits inside the 60 to 90 second target
+7. website: only public/ is served, no external assets, no GitHub links
 """
 import hashlib, json, re, subprocess, sys
 from pathlib import Path
@@ -116,6 +117,24 @@ if cn.exists():
                 errors.append(f"personal credit: {f} contains a listed name")
 else:
     notes.append("personal credit scan skipped, .credit-names not present")
+
+# website: only public/ is served, every asset is self hosted, no GitHub anywhere
+vj = ROOT / "vercel.json"
+if not vj.exists() or json.loads(vj.read_text()).get("outputDirectory") != "public":
+    errors.append("vercel.json: outputDirectory must be public, so repo files are not served")
+LINK_OK = ("tokeniser.com", "redbelly.network", "taskboard.redbellydao.network")
+SVG_NS = ("http://www.w3.org/2000/svg", "http://www.w3.org/1999/xlink")
+for f in files:
+    if not f.startswith("public/") or not f.endswith(TEXT_EXT):
+        continue
+    t = (ROOT / f).read_text(encoding="utf-8", errors="ignore")
+    if re.search(r"github", t, re.I):
+        errors.append(f"{f}: mentions GitHub")
+    for ns in SVG_NS:
+        t = t.replace(ns, "")
+    t = re.sub(r"<a\s[^>]*href=[\"'](https?://(www\.)?(" + "|".join(re.escape(h) for h in LINK_OK) + r")[^\"']*)[\"']", "<a", t, flags=re.I)
+    for m in re.finditer(r"(https?:)?//[a-z0-9.-]+\.[a-z]{2,}", t, re.I):
+        errors.append(f"{f}: external reference {m.group(0)}")
 
 tl = ROOT / "out/voice/timeline.json"
 if tl.exists():
