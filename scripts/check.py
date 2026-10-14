@@ -5,7 +5,8 @@
 2. every source snapshot exists and matches its SHA-256 in evidence/manifest.json
 3. every claim quote appears word for word in its source snapshot
 4. voiceover, on screen text and notes have no en or em dashes, emoji, price or returns
-   words, hype words, or numbers written as words
+   words, hype words, or numbers written as words; no tracked text file outside evidence/
+   and no commit message has an en or em dash or emoji
 5. no personal credit in tracked files (names are read from the gitignored .credit-names)
 6. voiceover timeline sits inside the 60 to 90 second target
 """
@@ -88,10 +89,24 @@ for sc in script["scenes"]:
 for k in ("title", "subtitle", "asset"):
     lint(f"meta.{k}", script["meta"].get(k, ""))
 
+files = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True).stdout.split()
+TEXT_EXT = (".md", ".txt", ".json", ".py", ".html", ".css", ".js", ".srt", ".vtt", ".svg")
+for f in files:
+    if f.startswith("evidence/") or not f.endswith(TEXT_EXT):
+        continue
+    t = (ROOT / f).read_text(encoding="utf-8", errors="ignore")
+    for rx, what in RULES[:2]:
+        m = rx.search(t)
+        if m:
+            errors.append(f"{f}: {what} found")
+msgs = subprocess.run(["git", "log", "--format=%B"], cwd=ROOT, capture_output=True, text=True).stdout
+for rx, what in RULES[:2]:
+    if rx.search(msgs):
+        errors.append(f"commit messages: {what} found")
+
 cn = ROOT / ".credit-names"
 if cn.exists():
     names = [n.strip().lower() for n in cn.read_text().splitlines() if n.strip()]
-    files = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True).stdout.split()
     for f in files:
         if f.startswith("evidence/"):
             continue

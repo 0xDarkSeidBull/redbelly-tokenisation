@@ -1,0 +1,16 @@
+Source: https://huggingface.co/hexgrad/Kokoro-82M (model card, raw README.md)
+Captured: 2026-10-14 UTC
+SHA-256 of the full model card as captured: 91dcabced89db6f109b8786642f50402d3ee87450e8189589b6f85520e7f4d78
+
+Verbatim excerpts
+
+Front matter:
+license: apache-2.0
+language:
+- en
+base_model:
+- yl4579/StyleTTS2-LJSpeech
+pipeline_tag: text-to-speech
+
+Text:
+With Apache-licensed weights, Kokoro can be deployed anywhere from production environments to personal projects.
