@@ -1,36 +1,47 @@
 # Tokenisation Explainer Animation (TASK-26)
 
-A 60 to 90 second animated explainer that follows one regulated asset, a new Australian fund, from the real world asset to a compliant token on Redbelly Network through Tokeniser.
+A 1:23 animated explainer that follows one regulated asset, a new Australian fund, from the real world asset to a token on Redbelly Network through Tokeniser. Every fact comes from the supplied resources and is quoted word for word in the script document.
 
-Status: script draft 1 is in, with a source quote for every claim and a voiceover build. Video, subtitles and the script document follow.
+## Deliverables
 
-## Layout
+| Deliverable | File |
+|---|---|
+| Final video, subtitles burned in (1920 x 1080, 30 fps, H.264 MP4) | `public/video/tokenisation-explainer.mp4` |
+| Same video without subtitles | `public/video/tokenisation-explainer-clean.mp4` |
+| Subtitles as separate files | `public/video/tokenisation-explainer.srt`, `public/video/tokenisation-explainer.vtt` |
+| Script document, with the source and exact quote for every claim | `public/docs/tokenisation-explainer-script.pdf`, `public/docs/tokenisation-explainer-script.docx` |
+| Project files | this repository: `content/`, `scenes/`, `scripts/`, `assets/`, `render.sh` |
+| Licence proof | `LICENSES/` |
+
+The website in `public/` plays the video and lists the script, sources and downloads. Every file it uses is served from the site itself.
+
+## One source for everything
+
+`content/script.json` holds the voiceover, the on screen text, the visual notes and a source quote for every claim. The voiceover, subtitles, animation, both script documents and the website are all built from it, so the video cannot drift from the script.
 
 | Path | What it holds |
 |---|---|
-| `content/script.json` | The single source for everything: voiceover sentences, on screen text, visual notes, and a source quote for every claim |
-| `scripts/check.py` | Runs all checks: quotes against snapshots, snapshot SHA-256, wording rules, personal credit, timing |
-| `scripts/build_voice.py` | Builds the voiceover and a sentence level timeline from the script |
-| `scripts/snap_sources.py` | Recaptures the source snapshots |
-| `sources.json` | Resource links from the brief, plus every page captured from them |
-| `evidence/` | A text snapshot of each page. `manifest.json` lists the URL, capture time (UTC) and SHA-256 of each |
-| `LICENSES/` | Licence proof for the voice. Fonts and music follow |
+| `content/script.json` | The single source |
+| `scenes/` | The animation: `stage.js` draws any frame from the script and the voice timeline |
+| `scripts/build_voice.py` | Voiceover with Kokoro-82M, plus a sentence level timeline |
+| `scripts/build_music.py`, `scripts/build_audio.py` | Music made from code, and the final mix at -16 LUFS |
+| `scripts/build_subs.py` | SRT and WebVTT from the timeline |
+| `scripts/build_stage.py`, `scripts/render_frames.py`, `scripts/encode.py` | Frame render in headless Chromium, then H.264 encode |
+| `scripts/build_pdf.py`, `scripts/build_docx.js` | Script document as PDF and Word |
+| `scripts/build_site.py` | The website in `public/` |
+| `scripts/check.py` | All checks, listed below |
+| `evidence/` | A text snapshot of every source page, with `manifest.json` (URL, capture time in UTC, SHA-256) |
+| `assets/` | Font files and the 2 official logos |
 
-## Build and check
+## Rebuild and check
 
 ```
-pip install playwright kokoro-onnx soundfile numpy
-python3 scripts/build_voice.py
-python3 scripts/check.py
+./render.sh
 ```
 
-`build_voice.py` needs the 2 model files listed in `LICENSES/voice.md`, placed in `models/`.
+`render.sh` runs every build step and then `scripts/check.py`. To only run the checks: `python3 scripts/check.py`. The voice model files are listed in `LICENSES/voice.md`.
 
-## Rules this project follows
-
-- Every claim in the script is quoted from a supplied resource and checked against its snapshot.
-- No price talk, no investment advice, no promises of returns.
-- Only self made or openly licensed assets, with licence proof in `LICENSES/`.
+`check.py` confirms that every quote is in its source snapshot, that the subtitles and both documents say exactly what the script says, that both videos are 1920 x 1080 at 30 fps, 60 to 90 seconds and under 32 MB, that loudness is about -16 LUFS, that no dash, emoji, price talk or hype word is used, and that the website loads nothing from outside its own domain.
 
 ## Recapture the sources
 
