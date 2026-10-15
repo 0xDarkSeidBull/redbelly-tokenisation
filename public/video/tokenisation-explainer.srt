@@ -33,71 +33,71 @@ No separate tokenisation
 licence is needed in Australia.
 
 8
-00:00:25,328 --> 00:00:27,228
+00:00:25,328 --> 00:00:27,230
 Stage 2, platform onboarding.
 
 9
-00:00:27,478 --> 00:00:32,135
+00:00:27,480 --> 00:00:32,137
 The manager and the fund are verified
 on Tokeniser, and the token is designed.
 
 10
-00:00:32,735 --> 00:00:35,219
+00:00:32,737 --> 00:00:35,221
 Stage 3, compliance configuration.
 
 11
-00:00:35,469 --> 00:00:38,596
+00:00:35,471 --> 00:00:38,598
 Identity checks, who may
 invest, and transfer limits
 
 12
-00:00:38,596 --> 00:00:41,844
+00:00:38,598 --> 00:00:41,846
 are encoded into the token
 and enforced automatically.
 
 13
-00:00:42,444 --> 00:00:44,581
+00:00:42,446 --> 00:00:44,583
 Stage 4, the investor register.
 
 14
-00:00:44,831 --> 00:00:48,773
+00:00:44,833 --> 00:00:48,775
 Each investor verifies their
 identity and gets a digital wallet.
 
 15
-00:00:49,023 --> 00:00:51,021
+00:00:49,025 --> 00:00:51,023
 No tokens are issued until then.
 
 16
-00:00:51,621 --> 00:00:55,872
+00:00:51,623 --> 00:00:55,874
 Tokens are then issued on Redbelly
 Network, into verified wallets.
 
 17
-00:00:56,122 --> 00:01:00,189
+00:00:56,124 --> 00:01:00,191
 From the first token, this register
 is the official record of ownership.
 
 18
-00:01:00,789 --> 00:01:05,015
+00:01:00,791 --> 00:01:05,017
 Every transfer is checked against the
 rules first, and breaches are rejected.
 
 19
-00:01:05,265 --> 00:01:07,374
+00:01:05,267 --> 00:01:07,376
 When investors hold their own wallet,
 
 20
-00:01:07,374 --> 00:01:10,280
+00:01:07,376 --> 00:01:10,282
 transfer and payment complete
 together, in seconds.
 
 21
-00:01:10,880 --> 00:01:15,584
+00:01:10,882 --> 00:01:15,586
 Tokeniser operates on Redbelly Network,
 Australia's public digital token
 
 22
-00:01:15,584 --> 00:01:20,615
+00:01:15,586 --> 00:01:20,617
 infrastructure, where transactions are
 confirmed once and cannot be reversed.

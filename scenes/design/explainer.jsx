@@ -344,8 +344,8 @@ function sMeaning({ T, W, CUES }) {
         const pr = at(T, m.arr(k) - 0.05, 0.55, 'pop');
         return <Token key={k} uid={'m2' + k} x={SLOTS[k]} y={SLOT_Y + 4 * Math.sin(1.7 * T + k)} r={SLOT_R * pr * (1 + bump(T, m.click(k), -0.07))} yaw={18 + 16 * Math.sin(1.05 * T + 0.6 + 1.3 * k)} pitch={10 + 4 * Math.sin(0.83 * T + k)} dk={0} />;
       })}
-      <div style={{ position: 'absolute', left: 0, top: 836, width: 1920, textAlign: 'center', fontWeight: 700, fontSize: 54, lineHeight: 1.15, letterSpacing: '-0.01em', color: C.ink, ...fade(at(T, W(1, 0, 'records ownership', -0.15), 0.7), 0, 22) }}>{os[0]}</div>
-      <div style={{ position: 'absolute', left: 0, top: 912, width: 1920, textAlign: 'center', fontWeight: 700, fontSize: 54, lineHeight: 1.15, letterSpacing: '-0.01em', color: C.ink, ...fade(at(T, m.tR - 0.1, 0.7), 0, 22) }}>{os[1]}</div>
+      <div style={{ position: 'absolute', left: 0, top: 770, width: 1920, textAlign: 'center', fontWeight: 700, fontSize: 54, lineHeight: 1.15, letterSpacing: '-0.01em', color: C.ink, ...fade(at(T, W(1, 0, 'records ownership', -0.15), 0.7), 0, 22) }}>{os[0]}</div>
+      <div style={{ position: 'absolute', left: 0, top: 846, width: 1920, textAlign: 'center', fontWeight: 700, fontSize: 54, lineHeight: 1.15, letterSpacing: '-0.01em', color: C.ink, ...fade(at(T, m.tR - 0.1, 0.7), 0, 22) }}>{os[1]}</div>
     </Frame>
   );
   const front = (

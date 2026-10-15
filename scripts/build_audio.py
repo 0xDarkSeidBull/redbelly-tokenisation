@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Polishes the voice (EQ, gentle compression, de-essing, a small room), adds sound effects (whooshes at scene changes; a sound on every check, cross, lock and toggle, timed by render_design.py --probe),
+"""Polishes the voice (EQ, gentle compression, de-essing, a small room), adds sound effects (whooshes at scene changes; a sound on every check, cross, lock and toggle, timed by render_design.py --probe;
+a soft chime when the last token lands and a short closing sting as the voice ends),
 and mixes it with the music. Music sits well under the voice and dips further while someone speaks.
 Final mix is loudness normalised to -16 LUFS, true peak -1.5 dBTP. Writes out/audio/mix.wav (48 kHz stereo)."""
 import json, subprocess
@@ -62,6 +63,7 @@ def main():
           
            "toggle": (mixa(blip(2600, 2300, 0.035, 0.008), 0.6 * blip(500, 380, 0.05, 0.02)), -20)}
     cuts = [(sc[i]["end"] + sc[i + 1]["start"]) / 2 for i in range(len(sc) - 1)]
+    coins = [e for e in events if e["kind"] == "coin"]
     events = [e for e in events if e["kind"] in SND]
     events.sort(key=lambda e: e["t"]); kept, lastk = [], {}
     for e in events:
@@ -75,6 +77,14 @@ def main():
             sfx[s0:e0, 0] += y[:e0 - s0] * (1 - pan); sfx[s0:e0, 1] += y[:e0 - s0] * pan
     for e in events:
         y, db = SND[e["kind"]]; place(y, e["t"], 0.25 + 0.5 * min(max(e["x"] / 1920, 0), 1), db)
+    # Two quiet accents, timed from the probe and the voice timeline rather than fixed seconds:
+    # a soft "settled" chime when the last token lands in its verified wallet,
+    # and a short closing sting as the voice ends and tokeniser.com appears.
+    if coins:
+        last = max(coins, key=lambda e: e["t"])
+        place(bell([1046.5, 1568.0, 2093.0], 1.4, 0.45), last["t"] + 0.12, 0.25 + 0.5 * min(max(last["x"] / 1920, 0), 1), -22)
+    sting = mixa(bell([523.25, 783.99], 2.6, 0.9), 0.7 * bell([659.25, 1046.5], 2.6, 0.75))
+    place(sting, sc[-1]["end"] + 0.3, 0.5, -21)
     mix = mu * gain[:, None] + vo[:, None] + sfx
     out = ROOT / "out/audio"; raw = out / "mix_raw.wav"
     sf.write(raw, (mix / np.max(np.abs(mix)) * 0.7).astype("float32"), SR)

@@ -237,6 +237,15 @@ if idx.exists():
             errors.append(f"website: no link to {need}")
 
 # 12 timing
+# Licence proof must ship for every asset not made for this project.
+LICENCE_FILES = ("LICENSES/README.md", "LICENSES/voice.md", "LICENSES/kokoro/Apache-2.0.txt", "LICENSES/kokoro/kokoro-onnx-LICENSE.txt",
+                 "assets/fonts/OFL.txt", "scenes/design/vendor/LICENSE-react.txt",
+                 "scenes/design/vendor/LICENSE-react-dom.txt", "scenes/design/vendor/LICENSE-babel-standalone.txt")
+for f in LICENCE_FILES:
+    if not (ROOT / f).exists():
+        errors.append(f"licence proof missing: {f}")
+notes.append(f"licence proof files present: {sum((ROOT / f).exists() for f in LICENCE_FILES)}/{len(LICENCE_FILES)}")
+
 tl = ROOT / "out/voice/timeline.json"
 if tl.exists():
     total = json.loads(tl.read_text())["total_seconds"]
