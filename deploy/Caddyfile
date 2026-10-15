@@ -1,5 +1,0 @@
-tokenise.test-hub.xyz {
-	root * /var/www/redbelly-tokenisation/public
-	encode gzip
-	file_server
-}

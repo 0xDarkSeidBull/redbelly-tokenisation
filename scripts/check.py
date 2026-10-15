@@ -206,9 +206,9 @@ else:
     notes.append("personal credit scan skipped, .credit-names not present")
 
 # 11 website
-cf = ROOT / "deploy/Caddyfile"
-if not cf.exists() or not re.search(r"root \* \S+/public\b", cf.read_text()):
-    errors.append("deploy/Caddyfile: web root must be public/, so repo files are not served")
+vj = ROOT / "vercel.json"
+if not vj.exists() or json.loads(vj.read_text()).get("outputDirectory") != "public":
+    errors.append("vercel.json: outputDirectory must be public, so repo files are not served")
 LINK_OK = ("tokeniser.com", "redbelly.network", "taskboard.redbellydao.network")
 SVG_NS = ("http://www.w3.org/2000/svg", "http://www.w3.org/1999/xlink")
 for p in sorted(PUB.rglob("*")):
