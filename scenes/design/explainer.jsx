@@ -209,7 +209,7 @@ function Token({ x, y, r, yaw = 18, pitch = 10, roll = 0, th = 0.22, op = 1, dk 
   const e1 = 0.022 * r;
   const ring = (rho, dx, dy, stroke, w, fill, k) => <ellipse key={k} cx={fx + dx * az} cy={dy} rx={rx * rho} ry={r * rho} fill={fill || 'none'} stroke={stroke} strokeWidth={w} />;
   return (
-    <svg viewBox={`${-V} ${-V} ${2 * V} ${2 * V}`} style={{ position: 'absolute', left: x - V, top: y - V, width: 2 * V, height: 2 * V, overflow: 'visible', opacity: op, pointerEvents: 'none' }}>
+    <svg data-sfx="token" data-uid={uid} viewBox={`${-V} ${-V} ${2 * V} ${2 * V}`} style={{ position: 'absolute', left: x - V, top: y - V, width: 2 * V, height: 2 * V, overflow: 'visible', opacity: op, pointerEvents: 'none' }}>
       <defs>
         <radialGradient id={uid + 'hl'}><stop offset="0" stopColor="#ffffff" stopOpacity={0.9 * (1 - dk)} /><stop offset="1" stopColor="#ffffff" stopOpacity="0" /></radialGradient>
         <radialGradient id={uid + 'hd'}><stop offset="0" stopColor={C.mint} stopOpacity={0.3 * dk} /><stop offset="1" stopColor={C.mint} stopOpacity="0" /></radialGradient>
@@ -491,7 +491,7 @@ function sCompliance({ T, W, CUES }) {
               <Tile x={24} y={16} s={56} r={14} style={{ opacity: 1 - 0.6 * cl((T - tk[k] - 0.4) / 0.2) }}><Ico n={ic} s={34} /></Tile>
               <div style={{ position: 'absolute', left: 100, top: 0, height: 88, display: 'flex', alignItems: 'center', fontWeight: 500, fontSize: 30, color: C.ink, whiteSpace: 'nowrap' }}>{os[2 + k]}</div>
               <div style={{ position: 'absolute', left: 632, top: 27, width: 62, height: 34, borderRadius: 17, background: mixHex('#e3e6ec', C.mint, pt) }}>
-                <div style={{ position: 'absolute', left: lerp(3, 31, pt), top: 3, width: 28, height: 28, borderRadius: 14, background: '#ffffff', boxShadow: '0 2px 6px rgba(32,50,31,0.25)' }} />
+                <div data-sfx="toggle" style={{ position: 'absolute', left: lerp(3, 31, pt), top: 3, width: 28, height: 28, borderRadius: 14, background: '#ffffff', boxShadow: '0 2px 6px rgba(32,50,31,0.25)' }} />
               </div>
             </div>
           );

@@ -48,8 +48,44 @@ def main():
     def bell(freqs, dur, decay):
         L = int(dur * SR); t = np.arange(L) / SR
         return sum(np.sin(2 * np.pi * f * t) * 0.6 ** i for i, f in enumerate(freqs)) * (1 - np.exp(-t / 0.002)) * np.exp(-t / decay)
-    SND = {"ok": (blip(880, 1320, 0.16, 0.045), -23), "no": (blip(220, 110, 0.25, 0.08), -19),
-           "lock": (blip(1800, 1600, 0.06, 0.012), -24), "coin": (bell([1568, 2349], 0.6, 0.18), -24)}
+    def mixa(*ys):
+        out = np.zeros(max(len(y) for y in ys))
+        for y in ys:
+            out[:len(y)] += y
+        return out
+    def swish(dur):
+        L = int(dur * SR); t = np.linspace(0, 1, L); env = np.sin(np.pi * t) ** 1.5; noise = rng.standard_normal(L); y = np.zeros(L); acc = 0.0
+        for j in range(L):
+            acc += (0.03 + 0.35 * t[j]) * (noise[j] - acc); y[j] = acc
+        return y * env
+    SND = {"ok": (mixa(blip(1200, 1800, 0.10, 0.03), 0.4 * blip(2400, 2400, 0.03, 0.006)), -19), "no": (blip(220, 110, 0.25, 0.08), -18),
+           "lock": (blip(1800, 1600, 0.06, 0.012), -21), "coin": (bell([1568, 2349], 0.6, 0.18), -21),
+           "form": (bell([1318.5, 1975.5, 2637], 0.7, 0.22), -20), "move": (swish(0.35), -23),
+           "land": (bell([2093, 3136], 0.4, 0.12), -21), "toggle": (mixa(blip(2600, 2300, 0.035, 0.008), 0.6 * blip(500, 380, 0.05, 0.02)), -20)}
+    cuts = [(sc[i]["end"] + sc[i + 1]["start"]) / 2 for i in range(len(sc) - 1)]
+    tp = ROOT / "out/audio/token_tracks.json"
+    for uid, pts in (json.loads(tp.read_text()) if tp.exists() else {}).items():
+        segs = []
+        for p0, p1 in zip(pts, pts[1:]):
+            v = ((p1[1] - p0[1]) ** 2 + (p1[2] - p0[2]) ** 2) ** 0.5
+            if v > 3 and p1[4] > 0.3:
+                if segs and p1[0] - segs[-1]["end"] < 0.3:
+                    g = segs[-1]; g["end"] = p1[0]; g["dist"] += v; g["xe"], g["effe"] = p1[1], p1[4]
+                else:
+                    segs.append({"start": p0[0], "end": p1[0], "dist": v, "x0": p0[1], "xe": p1[1], "effe": p1[4]})
+        for g in segs:
+            if g["end"] - g["start"] < 0.25 or g["dist"] < 120:
+                continue
+            if min(abs(g["start"] - c) for c in cuts) >= 0.6:
+                events.append({"t": g["start"], "kind": "move", "x": g["x0"]})
+            if g["effe"] > 0.5:
+                events.append({"t": g["end"], "kind": "land", "x": g["xe"]})
+    events.sort(key=lambda e: e["t"]); kept, lastk = [], {}
+    for e in events:
+        if e["t"] - lastk.get(e["kind"], -9) >= 0.25:
+            kept.append(e); lastk[e["kind"]] = e["t"]
+    events = kept
+    print("sound cues:", {k: sum(1 for e in events if e["kind"] == k) for k in sorted({e["kind"] for e in events})})
     def place(y, t, pan, db):
         y = y * vrms * 10 ** (db / 20) / (np.sqrt(np.mean(y ** 2)) + 1e-9); s0 = int(t * SR); e0 = min(n, s0 + len(y))
         if 0 <= s0 < n:

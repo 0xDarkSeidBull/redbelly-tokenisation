@@ -51,6 +51,12 @@ def main():
               let eff = 1, n = e; while (n && n !== document.body) { eff *= parseFloat(getComputedStyle(n).opacity); n = n.parentElement; }
               const m = /scale\\(([-\\d.]+)/.exec(e.style.transform || ''); const own = Math.min(e.style.opacity === '' ? 1 : +e.style.opacity, m ? +m[1] : 1);
               const r = e.getBoundingClientRect(); return [e.dataset.sfx, Math.round(r.x / 24), Math.round(r.y / 24), own, eff, r.x + r.width / 2]; }); }""")
+            pg.evaluate("""() => { window.__probe2 = () => {
+              const vis = e => { let v = 1, n = e; while (n && n !== document.body) { v *= parseFloat(getComputedStyle(n).opacity); n = n.parentElement; } return v; };
+              const tk = [...document.querySelectorAll('[data-sfx="token"]')].map(e => { const r = e.getBoundingClientRect(); return [e.dataset.uid, r.x + r.width / 2, r.y + r.height / 2, r.width, vis(e)]; });
+              const tg = [...document.querySelectorAll('[data-sfx="toggle"]')].map((e, i) => [i, parseFloat(e.style.left), vis(e), e.getBoundingClientRect().x]);
+              return [tk, tg]; }; }""")
+            tok, tog, tracks = {}, {}, {}
             prev, events, last = set(), [], {}
             for f in range(math.floor(box["dur"] * FPS)):
                 pg.evaluate(f"window.__seek({f / FPS})"); now = set()
@@ -61,8 +67,23 @@ def main():
                     if key not in prev and own < 0.9 and t - last.get(kind, -9) > 0.2:
                         events.append({"t": round(t, 3), "kind": kind, "x": round(cx)}); last[kind] = t
                 prev = now
+                tks, tgs = pg.evaluate("window.__probe2()"); t = f / FPS; seen = set()
+                for uid, cx, cy, w, eff in tks:
+                    seen.add(uid); tracks.setdefault(uid, []).append([round(t, 4), round(cx, 1), round(cy, 1), round(w, 1), round(eff, 2)])
+                    if uid not in tok:
+                        tok[uid] = 1
+                        if eff > 0.3:
+                            events.append({"t": round(t, 3), "kind": "form", "x": round(cx)})
+                for uid in list(tok):
+                    if uid not in seen:
+                        del tok[uid]
+                for i, left, eff, x in tgs:
+                    was = tog.get(i, left); tog[i] = left
+                    if eff > 0.3 and was <= 3.5 < left:
+                        events.append({"t": round(t, 3), "kind": "toggle", "x": round(x)})
             (ROOT / "out/audio").mkdir(parents=True, exist_ok=True)
             (ROOT / "out/audio/sfx_events.json").write_text(json.dumps(events, indent=1))
+            (ROOT / "out/audio/token_tracks.json").write_text(json.dumps(tracks))
             kinds = {}
             for e in events:
                 kinds[e["kind"]] = kinds.get(e["kind"], 0) + 1
