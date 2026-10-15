@@ -2,7 +2,7 @@
 """Polishes the voice (EQ, gentle compression, de-essing, a small room), adds sound effects
 (Mixkit samples fetched by scripts/fetch_sfx.py: a soft sweep at each scene change, a click on every check, toggle and lock,
 a tone when the last token lands and as the voice ends; a low synthesised blip on each rejected transfer),
-all timed by render_design.py --probe and kept 20 dB or more under the voice,
+all timed by render_design.py --probe, clearly audible but under the voice,
 and mixes it with the music. Music sits well under the voice and dips further while someone speaks.
 Final mix is loudness normalised to -16 LUFS, true peak -1.5 dBTP. Writes out/audio/mix.wav (48 kHz stereo)."""
 import json, subprocess
@@ -62,7 +62,7 @@ def main():
         for j in range(L):
             acc += (0.03 + 0.35 * t[j]) * (noise[j] - acc); y[j] = acc
         return y * env
-    SND = {"ok": (CLICK, -24), "toggle": (CLICK, -26), "lock": (CLICK, -24), "no": (blip(220, 110, 0.25, 0.08), -22)}
+    SND = {"ok": (CLICK, 2), "toggle": (CLICK, 1), "lock": (CLICK, 2), "no": (blip(220, 110, 0.25, 0.08), -1)}
     cuts = [(sc[i]["end"] + sc[i + 1]["start"]) / 2 for i in range(len(sc) - 1)]
     coins = [e for e in events if e["kind"] == "coin"]
     events = [e for e in events if e["kind"] in SND]
@@ -80,14 +80,14 @@ def main():
         y, db = SND[e["kind"]]; place(y, e["t"], 0.25 + 0.5 * min(max(e["x"] / 1920, 0), 1), db)
     # Scene changes: one soft sweep each, centred on the cut.
     for c in cuts:
-        place(SWEEP, c - len(SWEEP) / SR / 2, 0.5, -22)
+        place(SWEEP, c - len(SWEEP) / SR / 2, 0.5, -2)
     # Two accents: a tone when the last token lands in its verified wallet, and as the voice ends and tokeniser.com appears.
     if coins:
         last = max(coins, key=lambda e: e["t"])
-        place(TONE, last["t"] + 0.12, 0.25 + 0.5 * min(max(last["x"] / 1920, 0), 1), -22)
-    place(TONE, sc[-1]["end"] + 0.3, 0.5, -20)
-    # Effects step back a further 3 dB while the voice speaks, so every word stays on top.
-    sfx *= (1 - 0.29 * speech)[:, None]
+        place(TONE, last["t"] + 0.12, 0.25 + 0.5 * min(max(last["x"] / 1920, 0), 1), 3)
+    place(TONE, sc[-1]["end"] + 0.3, 0.5, 2)
+    # Effects step back 2 dB while the voice speaks, so every word stays on top.
+    sfx *= (1 - 0.2 * speech)[:, None]
     print(f"effects: {len(cuts)} sweeps, {len(events)} clicks and blips, 2 tones")
     mix = mu * gain[:, None] + vo[:, None] + sfx
     out = ROOT / "out/audio"; raw = out / "mix_raw.wav"
