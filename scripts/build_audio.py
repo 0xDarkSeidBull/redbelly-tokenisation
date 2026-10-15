@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-"""Polishes the voice (EQ, gentle compression, de-essing, a small room), adds sound effects (whooshes at scene changes; a sound on every check, cross, lock and toggle, and a coin sound
-(sfx.py) when a coin appears or lands, timed by render_design.py --probe),
+"""Polishes the voice (EQ, gentle compression, de-essing, a small room), adds sound effects (whooshes at scene changes; a sound on every check, cross, lock and toggle, timed by render_design.py --probe),
 and mixes it with the music. Music sits well under the voice and dips further while someone speaks.
 Final mix is loudness normalised to -16 LUFS, true peak -1.5 dBTP. Writes out/audio/mix.wav (48 kHz stereo)."""
 import json, subprocess
-from sfx import coin_appear, CLINK_AT
 from pathlib import Path
 import numpy as np
 import soundfile as sf
@@ -59,30 +57,12 @@ def main():
         for j in range(L):
             acc += (0.03 + 0.35 * t[j]) * (noise[j] - acc); y[j] = acc
         return y * env
-    COIN = coin_appear(); OFFS = {"form": -0.30, "coin": -0.30, "land": -CLINK_AT}
     SND = {"ok": (mixa(blip(1200, 1800, 0.10, 0.03), 0.4 * blip(2400, 2400, 0.03, 0.006)), -19), "no": (blip(220, 110, 0.25, 0.08), -18),
-           "lock": (blip(1800, 1600, 0.06, 0.012), -21), "coin": (COIN, -20),
-           "form": (COIN, -20),
-           "land": (COIN, -20), "toggle": (mixa(blip(2600, 2300, 0.035, 0.008), 0.6 * blip(500, 380, 0.05, 0.02)), -20)}
+           "lock": (blip(1800, 1600, 0.06, 0.012), -21),
+          
+           "toggle": (mixa(blip(2600, 2300, 0.035, 0.008), 0.6 * blip(500, 380, 0.05, 0.02)), -20)}
     cuts = [(sc[i]["end"] + sc[i + 1]["start"]) / 2 for i in range(len(sc) - 1)]
-    tp = ROOT / "out/audio/token_tracks.json"
-    for uid, pts in (json.loads(tp.read_text()) if tp.exists() else {}).items():
-        segs = []
-        for p0, p1 in zip(pts, pts[1:]):
-            v = ((p1[1] - p0[1]) ** 2 + (p1[2] - p0[2]) ** 2) ** 0.5
-            if v > 3 and p1[4] > 0.3:
-                if segs and p1[0] - segs[-1]["end"] < 0.3:
-                    g = segs[-1]; g["end"] = p1[0]; g["dist"] += v; g["xe"], g["effe"] = p1[1], p1[4]
-                else:
-                    segs.append({"start": p0[0], "end": p1[0], "dist": v, "x0": p0[1], "xe": p1[1], "effe": p1[4]})
-        for g in segs:
-            if g["end"] - g["start"] < 0.25 or g["dist"] < 120:
-                continue
-            if min(abs(g["start"] - c) for c in cuts) >= 0.6:
-                events.append({"t": g["start"], "kind": "move", "x": g["x0"]})
-            if g["effe"] > 0.5:
-                events.append({"t": g["end"], "kind": "land", "x": g["xe"]})
-    events = [e for e in events if e["kind"] != "move"]
+    events = [e for e in events if e["kind"] in SND]
     events.sort(key=lambda e: e["t"]); kept, lastk = [], {}
     for e in events:
         if e["t"] - lastk.get(e["kind"], -9) >= 0.25:
@@ -94,9 +74,7 @@ def main():
         if 0 <= s0 < n:
             sfx[s0:e0, 0] += y[:e0 - s0] * (1 - pan); sfx[s0:e0, 1] += y[:e0 - s0] * pan
     for e in events:
-        y, db = SND[e["kind"]]; place(y, e["t"] + OFFS.get(e["kind"], 0), 0.25 + 0.5 * min(max(e["x"] / 1920, 0), 1), db)
-    close = (sc[-2]["end"] + sc[-1]["start"]) / 2 + 0.3
-    place(COIN, close - 0.14, 0.5, -20)
+        y, db = SND[e["kind"]]; place(y, e["t"], 0.25 + 0.5 * min(max(e["x"] / 1920, 0), 1), db)
     mix = mu * gain[:, None] + vo[:, None] + sfx
     out = ROOT / "out/audio"; raw = out / "mix_raw.wav"
     sf.write(raw, (mix / np.max(np.abs(mix)) * 0.7).astype("float32"), SR)
