@@ -1,6 +1,6 @@
 # Tokenisation Explainer Animation (TASK-26)
 
-Live site: https://task26-olive.vercel.app
+Live site: https://tokenise.test-hub.xyz
 
 A 1:23 animated explainer, 60 fps, that follows one regulated asset, a new Australian fund, from the real world asset to a token on Redbelly Network through Tokeniser. Every fact comes from the supplied resources and is quoted word for word in the script document.
 
@@ -56,4 +56,12 @@ python3 scripts/snap_sources.py
 
 ## Deploy
 
-The site is static, with no build step on the server. On Vercel, import the repository. `vercel.json` sets the output directory to `public`, so nothing outside it is served. Every push to `main` redeploys.
+The site is static. `public/` is the web root, so nothing outside it is served. Live at https://tokenise.test-hub.xyz on a VPS with Caddy, using `deploy/Caddyfile`:
+
+```
+git clone <this repository> /var/www/redbelly-tokenisation
+# add deploy/Caddyfile to /etc/caddy/Caddyfile, then
+sudo systemctl reload caddy
+```
+
+To update: `cd /var/www/redbelly-tokenisation && git pull`.
