@@ -9,7 +9,7 @@ Script and sources
      hype words, or numbers written as words
 Deliverables (skipped with a note if not built yet)
   5. subtitles (SRT and WebVTT) say exactly the voiceover, in order
-  6. both videos: 1920x1080, 30 fps, H.264 and AAC, 60 to 90 seconds, under 32 MB
+  6. both videos: 1920x1080, 60 fps, H.264 and AAC, 60 to 90 seconds, under 32 MB
   7. audio loudness: about -16 LUFS integrated, true peak at or below -1 dBTP
   8. PDF and Word script documents contain every voiceover line and every on screen text
 Repo and website
@@ -26,7 +26,8 @@ from build_hash import build_hash
 
 ROOT = Path(__file__).resolve().parent.parent
 errors, notes = [], []
-THIRD_PARTY = ("evidence/", "LICENSES/kokoro/", "assets/fonts/OFL.txt", "assets/logos/")
+THIRD_PARTY = ("evidence/", "LICENSES/kokoro/", "assets/fonts/OFL.txt", "assets/logos/", "scenes/design/vendor/",
+               "scenes/design/support.js", "scenes/design/animations-v3.jsx", "scenes/design/tweaks-panel.jsx")
 TEXT_EXT = (".md", ".txt", ".json", ".py", ".js", ".html", ".css", ".srt", ".vtt", ".svg", ".sh")
 
 def norm(s):
@@ -98,6 +99,8 @@ for sc in script["scenes"]:
             errors.append(f"{sid} vo[{i}]: sentence must end with . ? or !")
     for i, t in enumerate(sc.get("on_screen", [])):
         lint(f"{sid} on_screen[{i}]", t)
+    for k, t in sc.get("ui_text", {}).items():
+        lint(f"{sid} ui_text.{k}", t)
     lint(f"{sid} name", sc.get("name", "")); lint(f"{sid} visual", sc.get("visual", ""))
     for j, c in enumerate(sc.get("claims", [])):
         nclaims += 1
@@ -134,7 +137,7 @@ for name in ("tokenisation-explainer.mp4", "tokenisation-explainer-clean.mp4"):
     info = json.loads(sh(["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(p)]).stdout)
     v = next(s for s in info["streams"] if s["codec_type"] == "video"); a = next(s for s in info["streams"] if s["codec_type"] == "audio")
     fps = eval(v["r_frame_rate"]); dur = float(info["format"]["duration"]); size = p.stat().st_size
-    if (v["codec_name"], v["width"], v["height"]) != ("h264", 1920, 1080) or fps < 24:
+    if (v["codec_name"], v["width"], v["height"]) != ("h264", 1920, 1080) or fps < 50:
         errors.append(f"{name}: video is {v['codec_name']} {v['width']}x{v['height']} at {fps} fps")
     if a["codec_name"] != "aac":
         errors.append(f"{name}: audio codec {a['codec_name']}")
@@ -169,7 +172,7 @@ for kind, text in docs.items():
     for sc in script["scenes"]:
         if norm(" ".join(sc["vo"])) not in text:
             errors.append(f"{kind} script: voiceover of {sc['id']} not found word for word")
-        for t in sc["on_screen"]:
+        for t in sc["on_screen"] + list(sc.get("ui_text", {}).values()):
             if norm(t) not in text:
                 errors.append(f"{kind} script: on screen text '{t}' not found")
     lint(f"{kind} script", text, RULES[:2])

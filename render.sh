@@ -7,9 +7,10 @@ python3 scripts/build_voice.py
 python3 scripts/build_music.py
 python3 scripts/build_audio.py
 python3 scripts/build_subs.py
-python3 scripts/build_stage.py
-rm -rf out/frames
-python3 scripts/render_frames.py
+python3 scripts/build_design.py
+rm -rf out/frames60 out/video
+python3 scripts/render_design.py
+python3 scripts/build_captions.py
 python3 scripts/encode.py
 python3 scripts/build_pdf.py
 node scripts/build_docx.js

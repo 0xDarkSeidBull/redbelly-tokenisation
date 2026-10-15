@@ -34,7 +34,7 @@ def main():
     m = S["meta"]; verified = datetime.date.fromisoformat(m["last_verified"]).strftime("%-d %b %Y")
     fonts = "\n".join(f"@font-face{{font-family:Montserrat;font-weight:{w};font-style:normal;font-display:swap;src:url('{u(f'fonts/Montserrat-{n}.woff2')}') format('woff2')}}"
                       for w, n in ((400, "Regular"), (500, "Medium"), (600, "SemiBold"), (700, "Bold")))
-    downloads = [("video/tokenisation-explainer.mp4", "Video with subtitles", "MP4"), ("video/tokenisation-explainer-clean.mp4", "Video without subtitles", "MP4"),
+    downloads = [("video/tokenisation-explainer.mp4", "Video with subtitles", "MP4, 60 fps"), ("video/tokenisation-explainer-clean.mp4", "Video without subtitles", "MP4"),
                  ("docs/tokenisation-explainer-script.pdf", "Script", "PDF"), ("docs/tokenisation-explainer-script.docx", "Script", "Word"),
                  ("video/tokenisation-explainer.srt", "Subtitles", "SRT"), ("video/tokenisation-explainer.vtt", "Subtitles", "WebVTT")]
     dl = "\n".join(f'<li><a href="{u(r)}" download>{E(a)}<span>{E(b)}, {mb(r)}</span></a></li>' for r, a, b in downloads)
@@ -49,7 +49,7 @@ def main():
 <h3>{E(sc["name"])}</h3>
 <p class="vo">{E(" ".join(sc["vo"]))}</p>
 <p class="label">On screen</p>
-<ul class="onscreen">{"".join(f"<li>{E(x)}</li>" for x in sc["on_screen"])}</ul>
+<ul class="onscreen">{"".join(f"<li>{E(x)}</li>" for x in sc["on_screen"])}</ul>{('<p class="label">In the illustrations</p><ul class="onscreen">' + "".join(f"<li>{E(x)}</li>" for x in dict.fromkeys(sc["ui_text"].values())) + "</ul>") if sc.get("ui_text") else ""}
 <details><summary>Sources for this scene ({len(sc["claims"])})</summary><ul class="claims">{claims}</ul></details>
 </li>''')
     sources = "\n".join(f'<li><a href="{E(s["url"])}" rel="noopener" target="_blank">{E(s["title"])}</a>'
@@ -144,7 +144,7 @@ footer{{padding:24px 24px 48px;font-size:14px;color:var(--muted)}}
 <dt>Voice</dt><dd>Synthetic voice from Kokoro-82M, voice af_heart. Apache License 2.0, which allows commercial use.</dd>
 <dt>Font</dt><dd>Montserrat, under the SIL Open Font License 1.1.</dd>
 <dt>Music</dt><dd>Made for this video from code. No third party audio.</dd>
-<dt>Icons and animation</dt><dd>Drawn for this video. No stock footage or stock icons.</dd>
+<dt>Icons and animation</dt><dd>Designed for this video with Claude Design and rendered frame by frame at 60 fps. No stock footage or stock icons.</dd>
 <dt>Logos</dt><dd>Tokeniser logo from tokeniser.com. Redbelly logo from the Redbelly brand kit.</dd>
 <dt>Project files</dt><dd>Script source, animation, build scripts, checks and licence proof are in the project repository that came with this submission.</dd>
 </dl>

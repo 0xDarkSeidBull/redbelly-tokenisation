@@ -3,7 +3,8 @@ encode.py stamps it into the MP4 metadata and check.py compares it, so a stale v
 import hashlib
 from pathlib import Path
 
-FILES = ("content/script.json", "scenes/stage.html", "scenes/stage.css", "scenes/stage.js")
+FILES = ("content/script.json", "scenes/design/template.html", "scenes/design/explainer.jsx", "scenes/design/animations-v3.jsx",
+         "scenes/design/support.js", "scenes/design/tweaks-panel.jsx", "scenes/design/logos.json")
 
 def build_hash(root):
     h = hashlib.sha256()

@@ -47,7 +47,7 @@ const body = [
   para('Section 1 is the script as it plays: the voiceover word for word and the text shown on screen. Section 2 lists every factual claim, the source page it comes from and the exact words on that page. Section 3 lists the source pages with the time each snapshot was taken and its SHA-256.'),
   h('1. Script'),
   table([1700, 4300, FULL - 6000], [['Time', 'Voiceover', 'On screen']].concat(S.scenes.map((sc, i) => [
-    mmss(TL.scenes[i].start) + ' to ' + mmss(TL.scenes[i].end) + '\n' + sc.name, sc.vo.join(' '), sc.on_screen.join('\n')])), true),
+    mmss(TL.scenes[i].start) + ' to ' + mmss(TL.scenes[i].end) + '\n' + sc.name, sc.vo.join(' '), sc.on_screen.join('\n') + (sc.ui_text ? '\nIn the illustrations: ' + [...new Set(Object.values(sc.ui_text))].join(', ') : '')])), true),
   para('Stage tracker, shown in scenes ' + S.globals.tracker.shown_in.map(x => x.slice(1).replace(/^0/, '')).join(', ') + ': ' +
     S.globals.tracker.labels.map((l, i) => (i + 1) + ' ' + l).join(', ') + '. The current stage is highlighted.', { color: MUTED, size: 17 }),
   h('2. Fact check'),
@@ -64,7 +64,7 @@ body.push(table([2400, FULL - 2400], [
   ['Voice', 'Kokoro-82M, voice af_heart. Apache License 2.0, commercial use allowed.'],
   ['Font', 'Montserrat. SIL Open Font License 1.1.'],
   ['Music', 'Made for this video from code. No third party audio.'],
-  ['Icons and animation', 'Drawn for this video. No stock footage or stock icons.'],
+  ['Icons and animation', 'Designed for this video with Claude Design and rendered frame by frame. No stock footage or stock icons.'],
   ['Logos', 'Tokeniser logo from tokeniser.com. Redbelly logo from the Redbelly brand kit.']], false));
 
 const doc = new Document({

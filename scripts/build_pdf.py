@@ -56,7 +56,7 @@ def build(out):
     story.append(P("1. Script", H))
     rows = [[P("Time", CELLB), P("Voiceover", CELLB), P("On screen", CELLB)]]
     for sc, tl in zip(S["scenes"], TL["scenes"]):
-        rows.append([P(f"{mmss(tl['start'])} to {mmss(tl['end'])}\n{sc['name']}", CELL), P(" ".join(sc["vo"]), CELL), P("\n".join(sc["on_screen"]), CELL)])
+        rows.append([P(f"{mmss(tl['start'])} to {mmss(tl['end'])}\n{sc['name']}", CELL), P(" ".join(sc["vo"]), CELL), P("\n".join(sc["on_screen"]) + (("\nIn the illustrations: " + ", ".join(dict.fromkeys(sc["ui_text"].values()))) if sc.get("ui_text") else ""), CELL)])
     story.append(table(rows, [30 * mm, (W - 30 * mm) * 0.56, (W - 30 * mm) * 0.44]))
     g = S["globals"]["tracker"]
     story.append(Spacer(1, 6))
@@ -79,7 +79,7 @@ def build(out):
     lic = [("Voice", "Kokoro-82M, voice af_heart. Apache License 2.0, commercial use allowed."),
            ("Font", "Montserrat. SIL Open Font License 1.1."),
            ("Music", "Made for this video from code. No third party audio."),
-           ("Icons and animation", "Drawn for this video. No stock footage or stock icons."),
+           ("Icons and animation", "Designed for this video with Claude Design and rendered frame by frame. No stock footage or stock icons."),
            ("Logos", "Tokeniser logo from tokeniser.com. Redbelly logo from the Redbelly brand kit.")]
     story.append(table([[P(a, CELLB), P(b, CELL)] for a, b in lic], [40 * mm, W - 40 * mm], head=False))
     def footer(cv, doc):

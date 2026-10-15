@@ -6,7 +6,7 @@
   "asset": "A new Australian fund",
   "spelling": "Australian English",
   "last_verified": "2026-10-14",
-  "version": "1"
+  "version": "2"
  },
  "voice": {
   "engine": "Kokoro-82M v1.0, ONNX build",
@@ -118,7 +118,16 @@
      "source": "tk-home",
      "quote": "Tokenisation records ownership of financial products and services as digital tokens, and lets you program the rules of the asset."
     }
-   ]
+   ],
+   "ui_text": {
+    "reg_title": "Ownership register",
+    "reg_sub": "Before tokenisation",
+    "row_1": "Investor 1",
+    "row_2": "Investor 2",
+    "row_3": "Investor 3",
+    "row_sub": "Recorded owner",
+    "row_pill": "Holding"
+   }
   },
   {
    "id": "s03",
@@ -150,8 +159,33 @@
      "covers": "No separate tokenisation licence is needed in Australia",
      "source": "tk-fund",
      "quote": "There is no separate tokenisation licence required in Australia."
+    },
+    {
+     "covers": "Trust deed, fund constitutional document",
+     "source": "tk-fund",
+     "quote": "Review the fund's constitutional documents, the trust deed, constitution, or shareholder agreement"
+    },
+    {
+     "covers": "Permits on-chain ownership records and electronic transfer",
+     "source": "tk-fund",
+     "quote": "Some documents need amendment to permit on-chain ownership records and electronic transfer."
+    },
+    {
+     "covers": "Existing licence, AFSL, covers issuing tokenised fund interests the same way as traditional interests",
+     "source": "tk-fund",
+     "quote": "existing AFSL (or their reliance on an AFSL holder) covers the issuance of tokenised fund interests in the same way it covers traditional interests"
     }
-   ]
+   ],
+   "ui_text": {
+    "doc_title": "Trust deed",
+    "doc_sub": "Fund constitutional document",
+    "clause_title": "Permits on-chain ownership records",
+    "clause_sub": "and electronic transfer",
+    "lic_title": "Existing licence",
+    "lic_sub": "AFSL",
+    "lic_line_1": "Covers issuing tokenised fund interests",
+    "lic_line_2": "the same way as traditional interests"
+   }
   },
   {
    "id": "s04",
@@ -182,8 +216,34 @@
      "covers": "the token is designed: asset class and rules",
      "source": "tk-fund",
      "quote": "For new funds, design the token parameters: asset class, compliance rules, and corporate action schedule."
+    },
+    {
+     "covers": "Entity verification, Fund details",
+     "source": "tk-fund",
+     "quote": "configuration of the fund's details on the platform"
+    },
+    {
+     "covers": "Fund manager, Fund, Entity verified",
+     "source": "tk-fund",
+     "quote": "Complete entity verification for the fund manager and the fund."
+    },
+    {
+     "covers": "Token parameters, Asset class, Compliance rules",
+     "source": "tk-fund",
+     "quote": "For new funds, design the token parameters: asset class, compliance rules, and corporate action schedule."
     }
-   ]
+   ],
+   "ui_text": {
+    "tab_1": "Entity verification",
+    "tab_2": "Fund details",
+    "tab_3": "Token parameters",
+    "mgr_title": "Fund manager",
+    "fund_title": "Fund",
+    "entity_sub": "Entity verified",
+    "area_title": "Token parameters",
+    "param_class": "Asset class",
+    "param_rules": "Compliance rules"
+   }
   },
   {
    "id": "s05",
@@ -221,8 +281,16 @@
      "covers": "encoded into the token and enforced automatically",
      "source": "tk-works",
      "quote": "Compliance rules are encoded into the token at issuance and enforced automatically at every transfer."
+    },
+    {
+     "covers": "Compliance rules",
+     "source": "tk-works",
+     "quote": "Compliance rules are encoded into the token at issuance and enforced automatically at every transfer."
     }
-   ]
+   ],
+   "ui_text": {
+    "rules_title": "Compliance rules"
+   }
   },
   {
    "id": "s06",
@@ -251,7 +319,16 @@
      "source": "tk-works",
      "quote": "Until onboarding is complete and the wallet is verified, tokens cannot be issued to or transferred to that investor."
     }
-   ]
+   ],
+   "ui_text": {
+    "reg_title": "Investor register",
+    "reg_sub": "Onboarding status",
+    "col_investor": "Investor",
+    "row_1": "Investor 1",
+    "row_2": "Investor 2",
+    "row_3": "Investor 3",
+    "row_sub": "Onboarding"
+   }
   },
   {
    "id": "s07",
@@ -281,8 +358,20 @@
      "covers": "From the first token",
      "source": "tk-fund",
      "quote": "For a new fund, the investor register is established on-chain at the point of the first token issuance."
+    },
+    {
+     "covers": "Register of record, Verified wallet",
+     "source": "tk-fund",
+     "quote": "The on-chain register is the register of record from day one."
     }
-   ]
+   ],
+   "ui_text": {
+    "reg_title": "Register of record",
+    "row_1": "Investor 1",
+    "row_2": "Investor 2",
+    "row_3": "Investor 3",
+    "row_sub": "Verified wallet"
+   }
   },
   {
    "id": "s08",
