@@ -27,7 +27,7 @@ The website in `public/` plays the video and lists the script, sources and downl
 | `content/sfx_cues.json` | Extra sound cues: time, sound, level and pan |
 | `scenes/design/` | The animation, designed in Claude Design. `explainer.jsx` draws any frame from `tk-data.js`, which `scripts/build_design.py` writes from the script and the voice timeline. React, ReactDOM and Babel run from `vendor/`, no CDN |
 | `scripts/build_voice.py` | Voiceover with Kokoro-82M, plus a sentence level timeline |
-| `scripts/build_music.py`, `scripts/build_audio.py` | Music made from code, voice polish, sound effects (5 Mixkit samples fetched by `scripts/fetch_sfx.py`: a soft sweep at each scene change, a click on every check, toggle and lock, a tone when the last token lands and at the close, plus the whoosh, coin and click cues in `content/sfx_cues.json`; clearly audible, always under the voice), final mix at -16 LUFS |
+| `scripts/build_music.py`, `scripts/build_audio.py` | Music made from code, voice polish, sound effects (5 Mixkit samples fetched by `scripts/fetch_sfx.py`: a soft sweep at each scene change, a click on every check, toggle and lock, a tone when the last token lands and at the close, plus the whoosh, coin, click and buzz cues in `content/sfx_cues.json`; the blip and buzz are made from code; clearly audible, always under the voice), final mix at -16 LUFS |
 | `scripts/build_subs.py` | SRT and WebVTT from the timeline |
 | `scripts/build_design.py`, `scripts/render_design.py` | Builds the animation and renders all 5016 frames at 60 fps, each a seek to its exact time |
 | `scripts/build_captions.py`, `scripts/encode.py` | Subtitle overlays in the brand style, then H.264 encode of both videos |

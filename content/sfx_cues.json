@@ -1,5 +1,5 @@
 {
- "note": "Extra sound cues on top of the event timed effects. t is seconds into the video, db is the level relative to the voice (as in build_audio.level), pan 0 left to 1 right. All sounds are Mixkit items fetched by scripts/fetch_sfx.py.",
+ "note": "Extra sound cues on top of the event timed effects. t is seconds into the video, db is the level relative to the voice (as in build_audio.level), pan 0 left to 1 right. Sounds are Mixkit items fetched by scripts/fetch_sfx.py, except buzz, which build_audio.py makes from code.",
  "cues": [
   {
    "t": 1.047,
@@ -149,6 +149,12 @@
    "t": 57.566,
    "sound": "click",
    "db": 7.1,
+   "pan": 0.5
+  },
+  {
+   "t": 63.958,
+   "sound": "buzz",
+   "db": 2.0,
    "pan": 0.5
   },
   {

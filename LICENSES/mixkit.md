@@ -20,4 +20,4 @@ Because the licence does not allow the files to be shared on their own, they are
 | Whoosh on the opening, the slides and the toggles | Arrow whoosh (1491) | https://assets.mixkit.co/active_storage/sfx/1491/1491.wav | `c9aa08de97e5a1235f9b2b4eb7a1096f2fe09586995859e46aa83e9066badca2` |
 | Coin as the fund takes form | Arcade game jump coin (216) | https://assets.mixkit.co/active_storage/sfx/216/216.wav | `b4aaa99e6076c75e7785bebd5431a5399043db47090233cae80cf76acf0114ca` |
 
-Where each sound plays: the event timed sounds are placed by `scripts/build_audio.py`, and the extra cues are listed in `content/sfx_cues.json`. The low blip on each rejected transfer is made from code in `scripts/build_audio.py`.
+Where each sound plays: the event timed sounds are placed by `scripts/build_audio.py`, and the extra cues are listed in `content/sfx_cues.json`. The low blip on each rejected transfer and the error buzz are made from code in `scripts/build_audio.py`.
