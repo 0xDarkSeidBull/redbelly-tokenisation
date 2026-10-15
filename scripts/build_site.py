@@ -14,6 +14,25 @@ def ver(p):
 def mmss(t):
     return f"{int(t // 60)}:{int(t % 60):02d}"
 
+CC_SCRIPT = """<script>
+(function () {
+  var v = document.getElementById('v'), b = document.getElementById('cc');
+  function sync() {
+    var on = false;
+    for (var i = 0; i < v.textTracks.length; i++) if (v.textTracks[i].mode === 'showing') on = true;
+    b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.textContent = on ? 'Subtitles: on' : 'Subtitles: off';
+  }
+  b.addEventListener('click', function () {
+    var on = b.getAttribute('aria-pressed') !== 'true';
+    for (var i = 0; i < v.textTracks.length; i++) v.textTracks[i].mode = on ? 'showing' : 'hidden';
+    sync();
+  });
+  v.textTracks.addEventListener('change', sync);
+  if (v.textTracks.length) v.textTracks[0].mode = 'showing';
+  sync();
+})();
+</script>"""
+
 def main():
     S = json.loads((ROOT / "content/script.json").read_text(encoding="utf-8"))
     TL = json.loads((ROOT / "out/voice/timeline.json").read_text(encoding="utf-8"))
@@ -77,6 +96,9 @@ h1{{margin:0 0 10px;font-weight:700;font-size:clamp(36px,6vw,64px);line-height:1
 .lead{{margin:0 0 28px;max-width:44ch;font-weight:500;font-size:clamp(18px,2.3vw,21px);color:var(--ink)}}
 .player{{margin:0;background:#fff;border-radius:20px;padding:10px}}
 video{{display:block;width:100%;height:auto;border-radius:12px;background:#fff}}
+video::cue{{font-family:Montserrat,system-ui,sans-serif;font-weight:600;color:#fff;background:rgba(32,35,42,.84)}}
+.cc{{display:inline-block;margin:10px 0 2px 4px;padding:8px 16px;border:2px solid var(--ink);border-radius:999px;background:#fff;color:var(--ink);font:600 15px/1.2 Montserrat,system-ui,sans-serif;cursor:pointer}}
+.cc[aria-pressed="false"]{{background:var(--mist);color:var(--muted);border-color:var(--line)}}
 .downloads{{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}}
 .downloads a{{display:block;padding:12px 16px;background:#fff;border:2px solid #fff;border-radius:12px;text-decoration:none;color:var(--ink);font-weight:600;font-size:16px}}
 .downloads a:hover{{border-color:var(--ink)}}
@@ -117,7 +139,8 @@ footer{{padding:24px 24px 48px;font-size:14px;color:var(--muted)}}
 <div class="wrap">
 <h1>{E(m["title"])}</h1>
 <p class="lead">{E(m["subtitle"])}, in {mmss(TL["total_seconds"])}.</p>
-<figure class="player"><video controls preload="metadata" playsinline poster="{u("video/poster.jpg")}"><source src="{u("video/tokenisation-explainer.mp4")}" type="video/mp4"></video></figure>
+<figure class="player"><video id="v" controls preload="metadata" playsinline poster="{u("video/poster.jpg")}"><source src="{u("video/tokenisation-explainer-clean.mp4")}" type="video/mp4"><track kind="captions" src="{u("video/tokenisation-explainer.vtt")}" srclang="en" label="English" default></video>
+<button id="cc" class="cc" type="button" aria-pressed="true">Subtitles: on</button></figure>
 <ul class="downloads">
 {dl}
 </ul>
@@ -152,6 +175,7 @@ footer{{padding:24px 24px 48px;font-size:14px;color:var(--muted)}}
 </section>
 </main>
 <footer class="wrap">Last verified {verified}. Script version {E(m["version"])}.</footer>
+{CC_SCRIPT}
 </body>
 </html>
 '''

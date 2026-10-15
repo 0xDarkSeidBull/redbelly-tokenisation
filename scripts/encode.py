@@ -51,7 +51,7 @@ def main():
         lst.write_text("".join(f"file '{OUT / f'seg_{variant}_{i}.mp4'}'\n" for i in range(len(segs))))
         run(["-f", "concat", "-safe", "0", "-i", str(lst), "-i", "out/audio/mix.wav", "-map", "0:v", "-map", "1:a", "-c:v", "copy"] + meta + [str(OUT / name)])
         print(name, f"{(OUT / name).stat().st_size / 1e6:.1f} MB")
-    run(["-ss", "5.0", "-i", str(OUT / "tokenisation-explainer-clean.mp4"), "-frames:v", "1", "-q:v", "3", str(OUT / "poster.jpg")])
+    run(["-ss", "7.4", "-i", str(OUT / "tokenisation-explainer-clean.mp4"), "-frames:v", "1", "-q:v", "3", str(OUT / "poster.jpg")])
 
 if __name__ == "__main__":
     main()
