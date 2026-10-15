@@ -1,5 +1,7 @@
 # Tokenisation Explainer Animation (TASK-26)
 
+Live site: https://tokenise.test-hub.xyz
+
 A 1:23 animated explainer, 60 fps, that follows one regulated asset, a new Australian fund, from the real world asset to a token on Redbelly Network through Tokeniser. Every fact comes from the supplied resources and is quoted word for word in the script document.
 
 ## Deliverables
@@ -22,9 +24,10 @@ The website in `public/` plays the video and lists the script, sources and downl
 | Path | What it holds |
 |---|---|
 | `content/script.json` | The single source |
+| `content/sfx_cues.json` | Extra sound cues: time, sound, level and pan |
 | `scenes/design/` | The animation, designed in Claude Design. `explainer.jsx` draws any frame from `tk-data.js`, which `scripts/build_design.py` writes from the script and the voice timeline. React, ReactDOM and Babel run from `vendor/`, no CDN |
 | `scripts/build_voice.py` | Voiceover with Kokoro-82M, plus a sentence level timeline |
-| `scripts/build_music.py`, `scripts/build_audio.py` | Music made from code, voice polish, sound effects (3 Mixkit samples fetched by `scripts/fetch_sfx.py`: a soft sweep at each scene change, a click on every check, toggle and lock, a tone when the last token lands and at the close; clearly audible, always under the voice), final mix at -16 LUFS |
+| `scripts/build_music.py`, `scripts/build_audio.py` | Music made from code, voice polish, sound effects (5 Mixkit samples fetched by `scripts/fetch_sfx.py`: a soft sweep at each scene change, a click on every check, toggle and lock, a tone when the last token lands and at the close, plus the whoosh, coin and click cues in `content/sfx_cues.json`; clearly audible, always under the voice), final mix at -16 LUFS |
 | `scripts/build_subs.py` | SRT and WebVTT from the timeline |
 | `scripts/build_design.py`, `scripts/render_design.py` | Builds the animation and renders all 5016 frames at 60 fps, each a seek to its exact time |
 | `scripts/build_captions.py`, `scripts/encode.py` | Subtitle overlays in the brand style, then H.264 encode of both videos |
@@ -40,7 +43,7 @@ The website in `public/` plays the video and lists the script, sources and downl
 ./render.sh
 ```
 
-`render.sh` runs every build step and then `scripts/check.py`. To only run the checks: `python3 scripts/check.py`. The voice model files are listed in `LICENSES/voice.md`. The 3 Mixkit sound effects are downloaded and checked by `scripts/fetch_sfx.py` (listed in `LICENSES/mixkit.md`), because their licence does not allow storing them in the repository.
+`render.sh` runs every build step and then `scripts/check.py`. To only run the checks: `python3 scripts/check.py`. The voice model files are listed in `LICENSES/voice.md`. The 5 Mixkit sound effects are downloaded and checked by `scripts/fetch_sfx.py` (listed in `LICENSES/mixkit.md`), because their licence does not allow storing them in the repository.
 
 `check.py` confirms that every quote is in its source snapshot, that the subtitles and both documents say exactly what the script says, that each video carries the build hash of the current script and animation code, that both videos are 1920 x 1080 at 60 fps, 60 to 90 seconds and under 32 MB, that loudness is about -16 LUFS, that no dash, emoji, price talk or hype word is used, and that the website loads nothing from outside its own domain.
 
@@ -50,3 +53,15 @@ The website in `public/` plays the video and lists the script, sources and downl
 playwright install chromium
 python3 scripts/snap_sources.py
 ```
+
+## Deploy
+
+The site is static. `public/` is the web root, so nothing outside it is served. Live at https://tokenise.test-hub.xyz on a VPS with Caddy, using `deploy/Caddyfile`:
+
+```
+git clone <this repository> /var/www/redbelly-tokenisation
+# add deploy/Caddyfile to /etc/caddy/Caddyfile, then
+sudo systemctl reload caddy
+```
+
+To update: `cd /var/www/redbelly-tokenisation && git pull`.

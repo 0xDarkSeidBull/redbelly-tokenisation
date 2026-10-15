@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Downloads the 3 Mixkit sound effects used in the mix into assets/sfx/ and checks each SHA-256.
+"""Downloads the 5 Mixkit sound effects used in the mix into assets/sfx/ and checks each SHA-256.
 The Mixkit Sound Effects Free License allows them in the video but not shared on their own,
 so the files are fetched at build time and never committed (assets/sfx/ is git-ignored).
 Licence and sources: LICENSES/mixkit.md"""
@@ -14,6 +14,10 @@ SFX = {
                   "1a7789372a284b2dc2f106da1375b4a3aa4ef3e794c5cbc1b404a1096a6aa467"),
     "tone.wav": ("https://assets.mixkit.co/active_storage/sfx/2870/2870.wav",
                  "084b78463e30dae4aac5edbf9e9c93cdee5ece4a4a688352e6a2b6686f9b1f4a"),
+    "whoosh.wav": ("https://assets.mixkit.co/active_storage/sfx/1491/1491.wav",
+                   "c9aa08de97e5a1235f9b2b4eb7a1096f2fe09586995859e46aa83e9066badca2"),
+    "coin.wav": ("https://assets.mixkit.co/active_storage/sfx/216/216.wav",
+                 "b4aaa99e6076c75e7785bebd5431a5399043db47090233cae80cf76acf0114ca"),
 }
 
 def main():

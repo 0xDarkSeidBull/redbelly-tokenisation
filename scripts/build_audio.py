@@ -2,7 +2,7 @@
 """Polishes the voice (EQ, gentle compression, de-essing, a small room), adds sound effects
 (Mixkit samples fetched by scripts/fetch_sfx.py: a soft sweep at each scene change, a click on every check, toggle and lock,
 a tone when the last token lands and as the voice ends; a low synthesised blip on each rejected transfer),
-all timed by render_design.py --probe, clearly audible but under the voice,
+all timed by render_design.py --probe, plus the extra whoosh, coin, sweep and click cues listed in content/sfx_cues.json, clearly audible but under the voice,
 and mixes it with the music. Music sits well under the voice and dips further while someone speaks.
 Final mix is loudness normalised to -16 LUFS, true peak -1.5 dBTP. Writes out/audio/mix.wav (48 kHz stereo)."""
 import json, subprocess
@@ -40,6 +40,7 @@ def main():
         a = np.abs(y); keep = np.nonzero(a > a.max() * 10 ** (-50 / 20))[0]
         return y[keep[0]:keep[-1] + 1]  # trim leading and trailing silence
     SWEEP, CLICK, TONE = sample("sweep.wav"), sample("click.wav"), sample("tone.wav")
+    LIB = {"sweep": SWEEP, "click": CLICK, "tone": TONE, "whoosh": sample("whoosh.wav"), "coin": sample("coin.wav")}
     def level(y, db):
         # loudness of the effect while it sounds, relative to the voice while it speaks
         act = y[np.abs(y) > np.max(np.abs(y)) * 0.05]
@@ -86,9 +87,13 @@ def main():
         last = max(coins, key=lambda e: e["t"])
         place(TONE, last["t"] + 0.12, 0.25 + 0.5 * min(max(last["x"] / 1920, 0), 1), 3)
     place(TONE, sc[-1]["end"] + 0.3, 0.5, 2)
+    # Extra cues: whooshes on the slides and toggles, coins as the fund forms, extra clicks on the check lists.
+    extra = json.loads((ROOT / "content/sfx_cues.json").read_text())["cues"]
+    for c in extra:
+        place(LIB[c["sound"]], c["t"], c["pan"], c["db"])
     # Effects step back 2 dB while the voice speaks, so every word stays on top.
     sfx *= (1 - 0.2 * speech)[:, None]
-    print(f"effects: {len(cuts)} sweeps, {len(events)} clicks and blips, 2 tones")
+    print(f"effects: {len(cuts)} sweeps, {len(events)} clicks and blips, 2 tones, {len(extra)} extra cues")
     mix = mu * gain[:, None] + vo[:, None] + sfx
     out = ROOT / "out/audio"; raw = out / "mix_raw.wav"
     sf.write(raw, (mix / np.max(np.abs(mix)) * 0.7).astype("float32"), SR)
