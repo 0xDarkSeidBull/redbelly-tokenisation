@@ -5,6 +5,7 @@ set -e
 cd "$(dirname "$0")"
 python3 scripts/build_voice.py
 python3 scripts/build_music.py
+python3 scripts/fetch_sfx.py
 python3 scripts/build_subs.py
 python3 scripts/build_design.py
 python3 scripts/render_design.py --probe

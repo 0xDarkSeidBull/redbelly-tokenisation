@@ -238,7 +238,7 @@ if idx.exists():
 
 # 12 timing
 # Licence proof must ship for every asset not made for this project.
-LICENCE_FILES = ("LICENSES/README.md", "LICENSES/voice.md", "LICENSES/kokoro/Apache-2.0.txt", "LICENSES/kokoro/kokoro-onnx-LICENSE.txt",
+LICENCE_FILES = ("LICENSES/README.md", "LICENSES/voice.md", "LICENSES/mixkit.md", "LICENSES/kokoro/Apache-2.0.txt", "LICENSES/kokoro/kokoro-onnx-LICENSE.txt",
                  "assets/fonts/OFL.txt", "scenes/design/vendor/LICENSE-react.txt",
                  "scenes/design/vendor/LICENSE-react-dom.txt", "scenes/design/vendor/LICENSE-babel-standalone.txt")
 for f in LICENCE_FILES:

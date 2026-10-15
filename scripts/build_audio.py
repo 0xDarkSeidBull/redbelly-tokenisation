@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-"""Polishes the voice (EQ, gentle compression, de-essing, a small room), adds sound effects (whooshes at scene changes; a sound on every check, cross, lock and toggle, timed by render_design.py --probe;
-a soft chime when the last token lands and a short closing sting as the voice ends),
+"""Polishes the voice (EQ, gentle compression, de-essing, a small room), adds sound effects
+(Mixkit samples fetched by scripts/fetch_sfx.py: a soft sweep at each scene change, a click on every check, toggle and lock,
+a tone when the last token lands and as the voice ends; a low synthesised blip on each rejected transfer),
+all timed by render_design.py --probe and kept 20 dB or more under the voice,
 and mixes it with the music. Music sits well under the voice and dips further while someone speaks.
 Final mix is loudness normalised to -16 LUFS, true peak -1.5 dBTP. Writes out/audio/mix.wav (48 kHz stereo)."""
 import json, subprocess
@@ -29,17 +31,19 @@ def main():
     g_speech, g_gap = vrms / mrms * 10 ** (-19 / 20), vrms / mrms * 10 ** (-12 / 20)
     gain = g_gap + (g_speech - g_gap) * speech
     rng = np.random.default_rng(7); sc = tl["scenes"]; sfx = np.zeros((n, 2))
-    for i in range(len(sc) - 1):
-        cut = (sc[i]["end"] + sc[i + 1]["start"]) / 2; L = int(0.8 * SR); s0 = int(cut * SR) - L // 2
-        if s0 < 0 or s0 + L > n:
-            continue
-        t = np.linspace(0, 1, L); env = np.sin(np.pi * t) ** 2
-        noise = rng.standard_normal(L); y = np.zeros(L); acc = 0.0
-        for j in range(L):
-            k = 0.02 + 0.25 * env[j]; acc += k * (noise[j] - acc); y[j] = acc
-        y *= env / (np.max(np.abs(y)) + 1e-9)
-        sfx[s0:s0 + L, 0] += y * (1 - 0.6 * t); sfx[s0:s0 + L, 1] += y * (0.4 + 0.6 * t)
-    sfx *= vrms * 10 ** (-17 / 20) / (np.sqrt(np.mean(sfx[np.abs(sfx).sum(1) > 0] ** 2)) + 1e-9)
+    def sample(name):
+        y, r = sf.read(ROOT / "assets/sfx" / name, dtype="float64")
+        y = y.mean(axis=1) if y.ndim > 1 else y
+        if r != SR:
+            from scipy.signal import resample_poly
+            y = resample_poly(y, SR, r)
+        a = np.abs(y); keep = np.nonzero(a > a.max() * 10 ** (-50 / 20))[0]
+        return y[keep[0]:keep[-1] + 1]  # trim leading and trailing silence
+    SWEEP, CLICK, TONE = sample("sweep.wav"), sample("click.wav"), sample("tone.wav")
+    def level(y, db):
+        # loudness of the effect while it sounds, relative to the voice while it speaks
+        act = y[np.abs(y) > np.max(np.abs(y)) * 0.05]
+        return y * vrms * 10 ** (db / 20) / (np.sqrt(np.mean(act ** 2)) + 1e-9)
     ev = ROOT / "out/audio/sfx_events.json"
     events = json.loads(ev.read_text()) if ev.exists() else []
     def blip(f0, f1, dur, decay):
@@ -58,10 +62,7 @@ def main():
         for j in range(L):
             acc += (0.03 + 0.35 * t[j]) * (noise[j] - acc); y[j] = acc
         return y * env
-    SND = {"ok": (mixa(blip(1200, 1800, 0.10, 0.03), 0.4 * blip(2400, 2400, 0.03, 0.006)), -19), "no": (blip(220, 110, 0.25, 0.08), -18),
-           "lock": (blip(1800, 1600, 0.06, 0.012), -21),
-          
-           "toggle": (mixa(blip(2600, 2300, 0.035, 0.008), 0.6 * blip(500, 380, 0.05, 0.02)), -20)}
+    SND = {"ok": (CLICK, -24), "toggle": (CLICK, -26), "lock": (CLICK, -24), "no": (blip(220, 110, 0.25, 0.08), -22)}
     cuts = [(sc[i]["end"] + sc[i + 1]["start"]) / 2 for i in range(len(sc) - 1)]
     coins = [e for e in events if e["kind"] == "coin"]
     events = [e for e in events if e["kind"] in SND]
@@ -72,19 +73,22 @@ def main():
     events = kept
     print("sound cues:", {k: sum(1 for e in events if e["kind"] == k) for k in sorted({e["kind"] for e in events})})
     def place(y, t, pan, db):
-        y = y * vrms * 10 ** (db / 20) / (np.sqrt(np.mean(y ** 2)) + 1e-9); s0 = int(t * SR); e0 = min(n, s0 + len(y))
+        y = level(y, db); s0 = int(t * SR); e0 = min(n, s0 + len(y))
         if 0 <= s0 < n:
             sfx[s0:e0, 0] += y[:e0 - s0] * (1 - pan); sfx[s0:e0, 1] += y[:e0 - s0] * pan
     for e in events:
         y, db = SND[e["kind"]]; place(y, e["t"], 0.25 + 0.5 * min(max(e["x"] / 1920, 0), 1), db)
-    # Two quiet accents, timed from the probe and the voice timeline rather than fixed seconds:
-    # a soft "settled" chime when the last token lands in its verified wallet,
-    # and a short closing sting as the voice ends and tokeniser.com appears.
+    # Scene changes: one soft sweep each, centred on the cut.
+    for c in cuts:
+        place(SWEEP, c - len(SWEEP) / SR / 2, 0.5, -22)
+    # Two accents: a tone when the last token lands in its verified wallet, and as the voice ends and tokeniser.com appears.
     if coins:
         last = max(coins, key=lambda e: e["t"])
-        place(bell([1046.5, 1568.0, 2093.0], 1.4, 0.45), last["t"] + 0.12, 0.25 + 0.5 * min(max(last["x"] / 1920, 0), 1), -22)
-    sting = mixa(bell([523.25, 783.99], 2.6, 0.9), 0.7 * bell([659.25, 1046.5], 2.6, 0.75))
-    place(sting, sc[-1]["end"] + 0.3, 0.5, -21)
+        place(TONE, last["t"] + 0.12, 0.25 + 0.5 * min(max(last["x"] / 1920, 0), 1), -22)
+    place(TONE, sc[-1]["end"] + 0.3, 0.5, -20)
+    # Effects step back a further 3 dB while the voice speaks, so every word stays on top.
+    sfx *= (1 - 0.29 * speech)[:, None]
+    print(f"effects: {len(cuts)} sweeps, {len(events)} clicks and blips, 2 tones")
     mix = mu * gain[:, None] + vo[:, None] + sfx
     out = ROOT / "out/audio"; raw = out / "mix_raw.wav"
     sf.write(raw, (mix / np.max(np.abs(mix)) * 0.7).astype("float32"), SR)
