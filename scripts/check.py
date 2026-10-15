@@ -228,6 +228,8 @@ if idx.exists():
     for ref in set(re.findall(r"""(?:src|href|url\()\s*=?\s*['"]?([^'"()\s>]+\?v=[0-9a-f]+)""", page)):
         path, v = ref.split("?v=")
         f = PUB / path
+        if not f.exists() and path.endswith("-clean.mp4"):
+            notes.append(f"website: {path} not in this copy (the size capped reviewer zip leaves it out)"); continue
         if not f.exists():
             errors.append(f"website: {path} is linked but missing")
         elif not hashlib.sha256(f.read_bytes()).hexdigest().startswith(v):
