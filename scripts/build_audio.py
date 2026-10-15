@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Polishes the voice (EQ, gentle compression, de-essing, a small room), adds soft whooshes at scene changes,
+"""Polishes the voice (EQ, gentle compression, de-essing, a small room), adds sound effects (whooshes at scene changes; a sound on every check, cross, lock and coin pop, timed by
+render_design.py --probe; a chime on the closing logos),
 and mixes it with the music. Music sits well under the voice and dips further while someone speaks.
 Final mix is loudness normalised to -16 LUFS, true peak -1.5 dBTP. Writes out/audio/mix.wav (48 kHz stereo)."""
 import json, subprocess
@@ -39,6 +40,25 @@ def main():
         y *= env / (np.max(np.abs(y)) + 1e-9)
         sfx[s0:s0 + L, 0] += y * (1 - 0.6 * t); sfx[s0:s0 + L, 1] += y * (0.4 + 0.6 * t)
     sfx *= vrms * 10 ** (-17 / 20) / (np.sqrt(np.mean(sfx[np.abs(sfx).sum(1) > 0] ** 2)) + 1e-9)
+    ev = ROOT / "out/audio/sfx_events.json"
+    events = json.loads(ev.read_text()) if ev.exists() else []
+    def blip(f0, f1, dur, decay):
+        L = int(dur * SR); t = np.arange(L) / SR; ph = 2 * np.pi * np.cumsum(np.linspace(f0, f1, L)) / SR
+        return np.sin(ph) * (1 - np.exp(-t / 0.003)) * np.exp(-t / decay)
+    def bell(freqs, dur, decay):
+        L = int(dur * SR); t = np.arange(L) / SR
+        return sum(np.sin(2 * np.pi * f * t) * 0.6 ** i for i, f in enumerate(freqs)) * (1 - np.exp(-t / 0.002)) * np.exp(-t / decay)
+    SND = {"ok": (blip(880, 1320, 0.16, 0.045), -23), "no": (blip(220, 110, 0.25, 0.08), -19),
+           "lock": (blip(1800, 1600, 0.06, 0.012), -24), "coin": (bell([1568, 2349], 0.6, 0.18), -24)}
+    def place(y, t, pan, db):
+        y = y * vrms * 10 ** (db / 20) / (np.sqrt(np.mean(y ** 2)) + 1e-9); s0 = int(t * SR); e0 = min(n, s0 + len(y))
+        if 0 <= s0 < n:
+            sfx[s0:e0, 0] += y[:e0 - s0] * (1 - pan); sfx[s0:e0, 1] += y[:e0 - s0] * pan
+    for e in events:
+        y, db = SND[e["kind"]]; place(y, e["t"], 0.25 + 0.5 * min(max(e["x"] / 1920, 0), 1), db)
+    close = (sc[-2]["end"] + sc[-1]["start"]) / 2 + 0.3
+    for i, f in enumerate((1046.5, 1318.5, 1568.0)):
+        place(bell([f, f * 2], 1.4, 0.45), close + 0.12 * i, 0.5, -21)
     mix = mu * gain[:, None] + vo[:, None] + sfx
     out = ROOT / "out/audio"; raw = out / "mix_raw.wav"
     sf.write(raw, (mix / np.max(np.abs(mix)) * 0.7).astype("float32"), SR)

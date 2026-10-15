@@ -3,6 +3,7 @@
 is a synchronous seek to its exact time, so the output never drops or repeats a frame.
   python3 scripts/render_design.py --budget 270      # resumable: skips frames already on disk
   python3 scripts/render_design.py --stills 4,30     # stills to out/stills/
+  python3 scripts/render_design.py --probe           # times of every check, cross, lock and coin pop, for sound effects
 """
 import argparse, functools, http.server, json, math, threading, time
 from pathlib import Path
@@ -29,7 +30,7 @@ SETUP = """() => {
 }"""
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--stills"); ap.add_argument("--budget", type=float, default=0); a = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--stills"); ap.add_argument("--probe", action="store_true"); ap.add_argument("--budget", type=float, default=0); a = ap.parse_args()
     srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(Quiet, directory=str(ROOT / "out/design")))
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     with sync_playwright() as p:
@@ -45,6 +46,27 @@ def main():
         if (round(box["x"]), round(box["y"]), round(box["w"]), round(box["h"])) != (0, 0, 1920, 1080):
             raise SystemExit(f"stage not at 1920x1080 origin: {box}")
         clip = {"x": 0, "y": 0, "width": 1920, "height": 1080}
+        if a.probe:
+            pg.evaluate("""() => { window.__probe = () => [...document.querySelectorAll('[data-sfx]')].map(e => {
+              let eff = 1, n = e; while (n && n !== document.body) { eff *= parseFloat(getComputedStyle(n).opacity); n = n.parentElement; }
+              const m = /scale\\(([-\\d.]+)/.exec(e.style.transform || ''); const own = Math.min(e.style.opacity === '' ? 1 : +e.style.opacity, m ? +m[1] : 1);
+              const r = e.getBoundingClientRect(); return [e.dataset.sfx, Math.round(r.x / 24), Math.round(r.y / 24), own, eff, r.x + r.width / 2]; }); }""")
+            prev, events, last = set(), [], {}
+            for f in range(math.floor(box["dur"] * FPS)):
+                pg.evaluate(f"window.__seek({f / FPS})"); now = set()
+                for kind, gx, gy, own, eff, cx in pg.evaluate("window.__probe()"):
+                    if eff < 0.3:
+                        continue
+                    key = (kind, gx, gy); now.add(key); t = f / FPS
+                    if key not in prev and own < 0.9 and t - last.get(kind, -9) > 0.2:
+                        events.append({"t": round(t, 3), "kind": kind, "x": round(cx)}); last[kind] = t
+                prev = now
+            (ROOT / "out/audio").mkdir(parents=True, exist_ok=True)
+            (ROOT / "out/audio/sfx_events.json").write_text(json.dumps(events, indent=1))
+            kinds = {}
+            for e in events:
+                kinds[e["kind"]] = kinds.get(e["kind"], 0) + 1
+            print("sound effect cues:", kinds); return
         if a.stills:
             out = ROOT / "out/stills"; out.mkdir(parents=True, exist_ok=True)
             for s in a.stills.split(","):

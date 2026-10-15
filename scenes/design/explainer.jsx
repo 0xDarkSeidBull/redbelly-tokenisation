@@ -124,7 +124,7 @@ function Badge({ kind = 'ok', s = 48, p = 1, style }) {
   if (p <= 0.001) return null;
   const bg = kind === 'ok' ? C.mint : kind === 'no' ? C.ink : '#ffffff';
   return (
-    <div style={{ width: s, height: s, borderRadius: '50%', background: bg, flex: 'none', boxSizing: 'border-box', border: kind === 'lock' ? `2.5px solid ${C.ink}` : 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: cl(p * 3), transform: `scale(${p})`, boxShadow: '0 4px 12px rgba(32,50,31,0.12)', ...style }}>
+    <div data-sfx={kind} style={{ width: s, height: s, borderRadius: '50%', background: bg, flex: 'none', boxSizing: 'border-box', border: kind === 'lock' ? `2.5px solid ${C.ink}` : 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: cl(p * 3), transform: `scale(${p})`, boxShadow: '0 4px 12px rgba(32,50,31,0.12)', ...style }}>
       {kind === 'ok' && <Ico n="check" s={s * 0.6} c={C.mintInk} w={7} />}
       {kind === 'no' && <Ico n="cross" s={s * 0.5} c="#ffffff" w={7} />}
       {kind === 'lock' && <LockIco s={s * 0.56} c={C.ink} w={4.5} />}
@@ -142,7 +142,7 @@ function Status({ x, y, s = 44, p, kind = 'ok', dark }) {
 function MiniCoin({ s = 30, p = 1 }) {
   if (p <= 0.001) return null;
   return (
-    <div style={{ width: s, height: s, borderRadius: '50%', background: 'radial-gradient(circle at 34% 30%, #effff6 0%, #a2ffc8 52%, #4fc78a 100%)', boxShadow: 'inset 0 0 0 1.5px rgba(22,84,52,0.28)', display: 'flex', alignItems: 'center', justifyContent: 'center', transform: `scale(${p})`, opacity: cl(p * 3) }}>
+    <div data-sfx="coin" style={{ width: s, height: s, borderRadius: '50%', background: 'radial-gradient(circle at 34% 30%, #effff6 0%, #a2ffc8 52%, #4fc78a 100%)', boxShadow: 'inset 0 0 0 1.5px rgba(22,84,52,0.28)', display: 'flex', alignItems: 'center', justifyContent: 'center', transform: `scale(${p})`, opacity: cl(p * 3) }}>
       <div style={{ width: s * 0.5, height: s * 0.5, borderRadius: '50%', boxShadow: 'inset 0 0 0 1.5px rgba(22,84,52,0.3)' }} />
     </div>
   );

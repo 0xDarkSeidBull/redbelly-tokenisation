@@ -63,7 +63,7 @@ body.push(h('4. Assets and licences'));
 body.push(table([2400, FULL - 2400], [
   ['Voice', 'Kokoro-82M, voice af_heart. Apache License 2.0, commercial use allowed.'],
   ['Font', 'Montserrat. SIL Open Font License 1.1.'],
-  ['Music', 'Made for this video from code. No third party audio.'],
+  ['Music', 'Made for this video from code. No third party audio.'], ['Sound effects', 'Made for this video from code, timed to the animation.'],
   ['Icons and animation', 'Designed for this video with Claude Design and rendered frame by frame. No stock footage or stock icons.'],
   ['Logos', 'Tokeniser logo from tokeniser.com. Redbelly logo from the Redbelly brand kit.']], false));
 

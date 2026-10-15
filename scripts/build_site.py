@@ -144,6 +144,7 @@ footer{{padding:24px 24px 48px;font-size:14px;color:var(--muted)}}
 <dt>Voice</dt><dd>Synthetic voice from Kokoro-82M, voice af_heart. Apache License 2.0, which allows commercial use.</dd>
 <dt>Font</dt><dd>Montserrat, under the SIL Open Font License 1.1.</dd>
 <dt>Music</dt><dd>Made for this video from code. No third party audio.</dd>
+<dt>Sound effects</dt><dd>Made for this video from code, timed to every check, coin and transition.</dd>
 <dt>Icons and animation</dt><dd>Designed for this video with Claude Design and rendered frame by frame at 60 fps. No stock footage or stock icons.</dd>
 <dt>Logos</dt><dd>Tokeniser logo from tokeniser.com. Redbelly logo from the Redbelly brand kit.</dd>
 <dt>Project files</dt><dd>Script source, animation, build scripts, checks and licence proof are in the project repository that came with this submission.</dd>
